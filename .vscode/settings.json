@@ -1,0 +1,19 @@
+{
+  "java.configuration.runtimes": [
+    {
+      "name": "JavaSE-17",
+      "path": "C:\\Program Files\\Java\\jdk-17"
+    },
+    {
+      "name": "JavaSE-21",
+      "path": "C:\\Program Files\\Java\\jdk-21",
+      "default": true
+    },
+    {
+      "name": "JavaSE-24",
+      "path": "C:\\Program Files\\Java\\jdk-24.0.1"
+    }
+  ],
+  "java.configuration.updateBuildConfiguration": "interactive",
+  "java.compile.nullAnalysis.mode": "automatic"
+}
