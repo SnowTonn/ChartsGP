@@ -92,6 +92,7 @@ Highcharts.setOptions({
       dataLabels: {
         style: {
           fontSize: "12px"
+          
         }
       },
       marker: {
