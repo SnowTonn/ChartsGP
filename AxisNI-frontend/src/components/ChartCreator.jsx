@@ -2,87 +2,143 @@
 import React, { useState, useMemo } from "react";
 import HighchartsReact from "highcharts-react-official";
 import Highcharts from "./utils/highcharts-config";
+//import chartStyles from "./utils/chartStyles";
 
 const chartTypes = ["column", "bar", "line", "pie", "area"];
 
 export default function ChartCreator({ data, onSave }) {
   const keys = Object.keys(data[0] || {});
   const [chartType, setChartType] = useState("column");
-  //const [xKey, setXKey] = useState("Year");
   const [xKey, setXKey] = useState(() => keys[0] || "");
-  //const [yKey, setYKey] = useState("Total Expenditure (£B) NI");
-  const [yKey, setYKey] = useState(() => keys[1] || "");
+  const [yKeys, setYKeys] = useState(() => (keys[1] ? [keys[1]] : []));
   const [drilldownKeys, setDrilldownKeys] = useState([]);
   const [title, setTitle] = useState("My Chart");
+  const [showSecondChart, setShowSecondChart] = useState(true);
 
-  
-  const availableDrilldownKeys = keys.filter((k) => k !== xKey && k !== yKey);
+  const availableDrilldownKeys = keys.filter((k) => k !== xKey && !yKeys.includes(k));
 
-  // Drilldown keys selector
   const handleDrilldownKeysChange = (e) => {
     const selectedOptions = Array.from(e.target.selectedOptions).map((o) => o.value);
     setDrilldownKeys(selectedOptions);
   };
 
   const { series, drilldown } = useMemo(() => {
-    if (!xKey || !yKey) return { series: [], drilldown: undefined };
+    if (!xKey || yKeys.length === 0) return { series: [], drilldown: undefined };
 
-    const mainSeries = [];
     const drilldownSeries = [];
+    const seenDrilldowns = new Set();
 
-    data.forEach((row) => {
-      const mainCategory = row[xKey];
-      const yValue = Number(row[yKey]) || 0;
+    const seriesByMetric = yKeys.map((metric) => {
+      const metricSeries = data.map((row) => {
+        const category = row[xKey];
+        const yValue = Number(row[metric]) || 0;
 
-      mainSeries.push({
-        name: mainCategory,
-        y: yValue,
-        drilldown: mainCategory,
+        // Add drilldown only once per category
+        if (!seenDrilldowns.has(category)) {
+          seenDrilldowns.add(category);
+          const drilldownData = drilldownKeys.map((key) => [
+            key,
+            Number(row[key]) || 0,
+          ]);
+          drilldownSeries.push({
+            id: category,
+            name: `${category} Breakdown`,
+            data: drilldownData,
+          });
+        }
+
+        return {
+          name: category,
+          y: yValue,
+          drilldown: category,
+        };
       });
 
-      const drilldownData = drilldownKeys.map((key) => [key, Number(row[key]) || 0]);
-
-      drilldownSeries.push({
-        id: mainCategory,
-        name: `${mainCategory} Breakdown`,
-        data: drilldownData,
-      });
+      return {
+        name: metric,
+        colorByPoint: yKeys.length === 1,
+        data: metricSeries,
+      };
     });
 
     return {
-      series: [
-        {
-          name: yKey,
-          colorByPoint: true,
-          data: mainSeries,
-        },
-      ],
+      series: seriesByMetric,
       drilldown: {
         series: drilldownSeries,
       },
     };
-  }, [data, xKey, yKey, drilldownKeys]);
+  }, [data, xKey, yKeys, drilldownKeys]);
+
+  
 
   const options = {
     chart: { type: chartType },
-    title: { text: title },
+    title: { text: title || yKeys.join(", ") },
     xAxis: {
       type: "category",
       title: { text: xKey },
     },
     yAxis: {
-      title: { text: yKey },
+      title: { text: yKeys.length === 1 ? yKeys[0] : "Metrics" },
     },
-    legend: { enabled: false },
+    legend: { enabled: true },
     plotOptions: {
       series: {
         borderWidth: 0,
         dataLabels: { enabled: true },
       },
+      pie: {
+        allowPointSelect: true,
+        cursor: "pointer",
+        dataLabels: {
+          enabled: true,
+          format: "<b>{point.name}</b>: {point.percentage:.3f} %",
+        },
+      },
+    },
+    tooltip: {
+      pointFormat: "<b>{point.y}</b> ({point.percentage:.3f}%)",
     },
     series,
     drilldown,
   };
+
+
+
+  const secondChartSeries = useMemo(() => {
+    if (drilldownKeys.length === 0) return [];
+
+    return drilldownKeys.map((key) => {
+      const total = data.reduce((sum, row) => sum + (Number(row[key]) || 0), 0);
+      return { name: key, y: total };
+    });
+  }, [data, drilldownKeys]);
+
+  const secondChartOptions = {
+    chart: { type: "pie" },
+    title: { text: "Summary of Selected Drilldown Keys" },
+    plotOptions: {
+      pie: {
+        allowPointSelect: true,
+        cursor: 'pointer',
+        dataLabels: {
+          enabled: true,
+          format: '<b>{point.name}</b>: {point.percentage:.3f} %',
+        },
+      },
+    },
+    tooltip: {
+      pointFormat: '<b>{point.y}</b> ({point.percentage:.3f} %)',
+    },
+    series: [
+      {
+        name: "Total",
+        colorByPoint: true,
+        data: secondChartSeries,
+      },
+    ],
+  };
+
 
   return (
     <div style={{ padding: "1rem", maxWidth: 700 }}>
@@ -112,7 +168,7 @@ export default function ChartCreator({ data, onSave }) {
           value={xKey}
           onChange={(e) => {
             setXKey(e.target.value);
-            setDrilldownKeys([]); // reset drilldown keys when xKey changes
+            setDrilldownKeys([]);
           }}
           style={{ flex: 1, minWidth: 120, padding: 6 }}
         >
@@ -124,12 +180,15 @@ export default function ChartCreator({ data, onSave }) {
         </select>
 
         <select
-          value={yKey}
+          multiple
+          value={yKeys}
           onChange={(e) => {
-            setYKey(e.target.value);
-            setDrilldownKeys([]); // reset drilldown keys when yKey changes
+            const selected = Array.from(e.target.selectedOptions).map((o) => o.value);
+            setYKeys(selected);
+            setDrilldownKeys([]);
           }}
-          style={{ flex: 1, minWidth: 180, padding: 6 }}
+          style={{ flex: 1, minWidth: 180, padding: 6, height: 100 }}
+          title="Select one or more Y metrics"
         >
           {keys.map((k) => (
             <option key={k} value={k}>
@@ -153,16 +212,27 @@ export default function ChartCreator({ data, onSave }) {
         </select>
       </div>
 
+      {/* Main Chart */}
       <HighchartsReact highcharts={Highcharts} options={options} />
 
-      {/* <button
-        onClick={() => onSave(title, JSON.stringify(options, null, 2))}
-        disabled={!xKey || !yKey}
-        style={{ marginTop: 12, padding: "8px 16px", fontSize: 16, cursor: "pointer" }}
-        title={!xKey || !yKey ? "Select X and Y axis keys first" : "Save Chart Config"}
-      >
-        Save Chart
-      </button> */}
+      {/* Toggle and Second Chart */}
+      {secondChartSeries.length > 0 && (
+        <div style={{ marginTop: 20 }}>
+          <label style={{ display: "block", marginBottom: 8 }}>
+            <input
+              type="checkbox"
+              checked={showSecondChart}
+              onChange={() => setShowSecondChart((prev) => !prev)}
+              style={{ marginRight: 6 }}
+            />
+            Show summary chart
+          </label>
+
+          {showSecondChart && (
+            <HighchartsReact highcharts={Highcharts} options={secondChartOptions} />
+          )}
+        </div>
+      )}
     </div>
   );
 }
