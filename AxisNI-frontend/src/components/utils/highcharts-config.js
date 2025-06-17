@@ -106,7 +106,8 @@ Highcharts.setOptions({
       dataLabels: {
         enabled: false,
         style: {
-          fontSize: "12px"
+          fontSize: "12px",
+          color: "#111"
         }
       },
       marker: {

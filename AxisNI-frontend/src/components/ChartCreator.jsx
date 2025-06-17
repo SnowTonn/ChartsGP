@@ -2,7 +2,6 @@
 import React, { useState, useMemo } from "react";
 import HighchartsReact from "highcharts-react-official";
 import Highcharts from "./utils/highcharts-config";
-//import chartStyles from "./utils/chartStyles";
 
 const chartTypes = ["column", "bar", "line", "pie", "area"];
 
@@ -14,11 +13,17 @@ export default function ChartCreator({ data, onSave }) {
   const [drilldownKeys, setDrilldownKeys] = useState([]);
   const [title, setTitle] = useState("My Chart");
   const [showSecondChart, setShowSecondChart] = useState(true);
+  const [showDataLabels, setShowDataLabels] = useState(true);
+  const [showLegend, setShowLegend] = useState(true); // 
 
-  const availableDrilldownKeys = keys.filter((k) => k !== xKey && !yKeys.includes(k));
+  const availableDrilldownKeys = keys.filter(
+    (k) => k !== xKey && !yKeys.includes(k)
+  );
 
   const handleDrilldownKeysChange = (e) => {
-    const selectedOptions = Array.from(e.target.selectedOptions).map((o) => o.value);
+    const selectedOptions = Array.from(e.target.selectedOptions).map(
+      (o) => o.value
+    );
     setDrilldownKeys(selectedOptions);
   };
 
@@ -33,7 +38,6 @@ export default function ChartCreator({ data, onSave }) {
         const category = row[xKey];
         const yValue = Number(row[metric]) || 0;
 
-        // Add drilldown only once per category
         if (!seenDrilldowns.has(category)) {
           seenDrilldowns.add(category);
           const drilldownData = drilldownKeys.map((key) => [
@@ -69,10 +73,10 @@ export default function ChartCreator({ data, onSave }) {
     };
   }, [data, xKey, yKeys, drilldownKeys]);
 
-  
+  const isPieChart = chartType === "pie";
 
   const options = {
-    chart: { type: chartType },
+    chart: { type: chartType, height: 550 },
     title: { text: title || yKeys.join(", ") },
     xAxis: {
       type: "category",
@@ -80,30 +84,38 @@ export default function ChartCreator({ data, onSave }) {
     },
     yAxis: {
       title: { text: yKeys.length === 1 ? yKeys[0] : "Metrics" },
+      labels: {
+        format: "£{value}M",
+      },
     },
-    legend: { enabled: true },
+    legend: { enabled: showLegend }, // 
     plotOptions: {
       series: {
         borderWidth: 0,
-        dataLabels: { enabled: true },
+        dataLabels: {
+          enabled: showDataLabels,
+          format: isPieChart
+            ? "<b>{point.name}</b>: {point.percentage:.2f} %"
+            : "£{point.y:.2f}M",
+        },
       },
       pie: {
         allowPointSelect: true,
         cursor: "pointer",
         dataLabels: {
-          enabled: true,
-          format: "<b>{point.name}</b>: {point.percentage:.3f} %",
+          enabled: showDataLabels,
+          format: "<b>{point.name}</b>: {point.percentage:.2f} %",
         },
       },
     },
     tooltip: {
-      pointFormat: "<b>{point.y}</b> ({point.percentage:.3f}%)",
+      pointFormat: isPieChart
+        ? "<b>{point.y}</b> ({point.percentage:.2f}%)"
+        : "<b>£{point.y:.2f}M</b>",
     },
     series,
     drilldown,
   };
-
-
 
   const secondChartSeries = useMemo(() => {
     if (drilldownKeys.length === 0) return [];
@@ -120,15 +132,15 @@ export default function ChartCreator({ data, onSave }) {
     plotOptions: {
       pie: {
         allowPointSelect: true,
-        cursor: 'pointer',
+        cursor: "pointer",
         dataLabels: {
-          enabled: true,
-          format: '<b>{point.name}</b>: {point.percentage:.3f} %',
+          enabled: showDataLabels,
+          format: "<b>{point.name}</b>: {point.percentage:.2f} %",
         },
       },
     },
     tooltip: {
-      pointFormat: '<b>{point.y}</b> ({point.percentage:.3f} %)',
+      pointFormat: "<b>{point.y}</b> ({point.percentage:.2f} %)",
     },
     series: [
       {
@@ -138,7 +150,6 @@ export default function ChartCreator({ data, onSave }) {
       },
     ],
   };
-
 
   return (
     <div style={{ padding: "1rem", maxWidth: 700 }}>
@@ -171,6 +182,7 @@ export default function ChartCreator({ data, onSave }) {
             setDrilldownKeys([]);
           }}
           style={{ flex: 1, minWidth: 120, padding: 6 }}
+          title="Select one X metrics"
         >
           {keys.map((k) => (
             <option key={k} value={k}>
@@ -187,7 +199,7 @@ export default function ChartCreator({ data, onSave }) {
             setYKeys(selected);
             setDrilldownKeys([]);
           }}
-          style={{ flex: 1, minWidth: 180, padding: 6, height: 100 }}
+          style={{ flex: 3, minWidth: 180, padding: 6, height: 150 }}
           title="Select one or more Y metrics"
         >
           {keys.map((k) => (
@@ -201,7 +213,7 @@ export default function ChartCreator({ data, onSave }) {
           multiple
           value={drilldownKeys}
           onChange={handleDrilldownKeysChange}
-          style={{ flex: 1, minWidth: 250, padding: 6, height: 100 }}
+          style={{ flex: 1, minWidth: 250, padding: 6, height: 150 }}
           title="Select categories to show on drilldown (Ctrl/Cmd+click for multiple)"
         >
           {availableDrilldownKeys.map((k) => (
@@ -211,6 +223,28 @@ export default function ChartCreator({ data, onSave }) {
           ))}
         </select>
       </div>
+
+      {/* Data Labels Toggle */}
+      <label style={{ display: "block", marginBottom: 12 }}>
+        <input
+          type="checkbox"
+          checked={showDataLabels}
+          onChange={() => setShowDataLabels((prev) => !prev)}
+          style={{ marginRight: 6 }}
+        />
+        Show values on chart
+      </label>
+
+      {/* Legend Toggle  */}
+      <label style={{ display: "block", marginBottom: 12 }}>
+        <input
+          type="checkbox"
+          checked={showLegend}
+          onChange={() => setShowLegend((prev) => !prev)}
+          style={{ marginRight: 6 }}
+        />
+        Show legend
+      </label>
 
       {/* Main Chart */}
       <HighchartsReact highcharts={Highcharts} options={options} />
