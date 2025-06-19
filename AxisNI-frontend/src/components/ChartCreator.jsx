@@ -85,7 +85,7 @@ export default function ChartCreator({ data, onSave }) {
     yAxis: {
       title: { text: yKeys.length === 1 ? yKeys[0] : "Metrics" },
       labels: {
-        format: "£{value}M",
+        format: "{value}", //£
       },
     },
     legend: { enabled: showLegend }, // 
@@ -96,7 +96,7 @@ export default function ChartCreator({ data, onSave }) {
           enabled: showDataLabels,
           format: isPieChart
             ? "<b>{point.name}</b>: {point.percentage:.2f} %"
-            : "£{point.y:.2f}M",
+            : "{point.y:.2f}", //£
         },
       },
       pie: {
@@ -111,7 +111,7 @@ export default function ChartCreator({ data, onSave }) {
     tooltip: {
       pointFormat: isPieChart
         ? "<b>{point.y}</b> ({point.percentage:.2f}%)"
-        : "<b>£{point.y:.2f}M</b>",
+        : "<b>{point.y:.2f}</b>", //£
     },
     series,
     drilldown,

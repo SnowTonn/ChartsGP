@@ -1,6 +1,6 @@
 // frontend-react/src/components/ChartList.jsx
 import React, { useEffect, useState } from "react";
-import { getCharts } from "../services/api";
+import { getCharts } from "../../services/api";
 
 export default function ChartList() {
   const [charts, setCharts] = useState([]);

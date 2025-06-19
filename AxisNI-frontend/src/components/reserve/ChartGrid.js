@@ -1,7 +1,7 @@
 // components/ChartGrid.js
 import React from "react";
 import GridLayout from "react-grid-layout";
-import ChartCreator from "./ChartCreator";
+import ChartCreator from "../ChartCreator";
 
 export default function ChartGrid({ data, charts, onUpdateChart, onRemoveChart }) {
   const layout = charts.map((chart, index) => ({
