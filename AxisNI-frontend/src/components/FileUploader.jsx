@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { uploadExcel, uploadCsv, getSheetNames } from "../services/api";
 import ChartCreator from "./ChartCreator";
+import { Link } from "react-router-dom";
 
 export default function FileUploader() {
   const [fileEntries, setFileEntries] = useState([]);
@@ -172,7 +173,9 @@ export default function FileUploader() {
       <InteractiveButton onClick={() => setShowUploaderPanel((prev) => !prev)}>
         {showUploaderPanel ? "▼ Hide Uploader" : "▶ Show Uploader"}
       </InteractiveButton>
-
+      <InteractiveButton onClick={addChart}>
+            <Link to="/">← Back to Dashboard</Link>
+      </InteractiveButton>
       {/* Uploader Panel */}
       {showUploaderPanel && (
         <div
@@ -186,7 +189,8 @@ export default function FileUploader() {
         ><h2 style={{ textAlign: "center", fontSize: "1.5rem", marginBottom: "1rem" }}>
             🍀 Upload & Combine Files
           </h2>
-          <input type="file" multiple onChange={handleFilesChange} />
+           
+          <input type="file" multiple onChange={handleFilesChange} /> 
 
           {fileEntries.map((entry, idx) => (
             <div
@@ -350,7 +354,7 @@ export default function FileUploader() {
           <InteractiveButton onClick={addChart}>
             + Add Chart
           </InteractiveButton>
-
+          
           <div
             style={{
               display: "grid",

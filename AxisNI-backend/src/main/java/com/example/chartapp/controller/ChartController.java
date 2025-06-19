@@ -15,7 +15,8 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api")
-@CrossOrigin(origins = "http://localhost:3000")
+//@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = {"http://localhost:3000", "https://chartsgp-3.onrender.com"}) //@CrossOrigin(origins = "http://localhost:3000")
 @AllArgsConstructor
 public class ChartController {
 

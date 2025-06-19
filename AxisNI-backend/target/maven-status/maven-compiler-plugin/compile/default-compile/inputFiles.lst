@@ -3,4 +3,6 @@ C:\Denis_Dev\AxisNI\AxisNI-backend\src\main\java\com\example\chartapp\controller
 C:\Denis_Dev\AxisNI\AxisNI-backend\src\main\java\com\example\chartapp\service\ExcelService.java
 C:\Denis_Dev\AxisNI\AxisNI-backend\src\main\java\com\example\chartapp\service\FileParsingService.java
 C:\Denis_Dev\AxisNI\AxisNI-backend\src\main\java\com\example\chartapp\ChartAppApplication.java
+C:\Denis_Dev\AxisNI\AxisNI-backend\src\main\java\com\example\chartapp\controller\SecurityConfig.java
 C:\Denis_Dev\AxisNI\AxisNI-backend\src\main\java\com\example\chartapp\repository\ChartRepository.java
+C:\Denis_Dev\AxisNI\AxisNI-backend\src\main\java\com\example\chartapp\controller\config\CorsConfig.java

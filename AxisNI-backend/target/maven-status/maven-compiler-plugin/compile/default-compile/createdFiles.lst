@@ -1,6 +1,8 @@
 com\example\chartapp\model\Chart$ChartBuilder.class
 com\example\chartapp\ChartAppApplication.class
 com\example\chartapp\service\ExcelService.class
+com\example\chartapp\controller\config\CorsConfig.class
+com\example\chartapp\controller\SecurityConfig.class
 com\example\chartapp\controller\ChartController$ChartDto.class
 com\example\chartapp\model\Chart.class
 com\example\chartapp\controller\ChartController.class
