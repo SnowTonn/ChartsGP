@@ -271,7 +271,7 @@ export default function CoolDashboard() {
       }}
     >
       <h1 style={{ textAlign: "center", marginBottom: 20, color: COLORS.total }}>
-        Budget Dashboard
+        Budget Dashboard NI 2010 - 2025
       </h1>
 
       <div
