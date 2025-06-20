@@ -157,27 +157,45 @@ export default function CoolDashboard() {
     });
   });
 
+    const resourceCategorySeries = categories.map((cat, catIdx) => ({
+    name: cat,
+    data: mainData.map((yearData) => drilldownData[yearData.Year].resource[catIdx]),
+    type: "line",
+    color: undefined, // let Highcharts assign color automatically or define your own palette
+  }));
+
+  const capitalCategorySeries = categories.map((cat, catIdx) => ({
+    name: cat,
+    data: mainData.map((yearData) => drilldownData[yearData.Year].capital[catIdx]),
+    type: "line",
+    color: undefined,
+  }));
+
+
+
   const options = {
     chart: {
       height: 600,
-      type: selectedView === "TotalBudget" ? "line" : "column",
+      type: selectedView === "TotalBudget" ? "line" :
+            selectedView === "ResourceBreakdown" ? "line" : "column",
       animation: { duration: 800 },
     },
     title: {
       text:
         selectedView === "TotalBudget"
           ? "Total Budget Over Years (£M)"
-          : `Budget Breakdown for ${drilldownYear || "Year"} (£M)`,
+          : selectedView === "ResourceBreakdown"
+            ? `Resource Budget by Category (2010 - 2025) (£M)`
+            : `Budget Breakdown for ${drilldownYear || "Year"} (£M)`,
       style: { fontWeight: "bold", fontSize: "20px" },
     },
     xAxis: {
-      categories:
-        selectedView === "TotalBudget"
-          ? yearCategories
-          : drilldownYear
+      categories: selectedView === "TotalBudget" || selectedView === "ResourceBreakdown"
+        ? yearCategories
+        : drilldownYear
           ? drilldownData[drilldownYear].categories
           : [],
-      title: { text: selectedView === "TotalBudget" ? "Year" : "Department" },
+      title: { text: selectedView === "TotalBudget" || selectedView === "ResourceBreakdown" ? "Year" : "Department" },
       crosshair: true,
     },
     yAxis: {
@@ -197,16 +215,16 @@ export default function CoolDashboard() {
     plotOptions: {
       series: {
         cursor: "pointer",
-        marker: { enabled: selectedView === "TotalBudget" },
+        marker: { enabled: selectedView !== "Breakdown" }, // markers only for line charts
         point: {
           events: {
             click: function () {
-                if (selectedView === "TotalBudget") {
-                    setDrilldownYear(this.category);
-                    setSelectedView("Breakdown");
-                    setBreakdownType(null);  // <-- Add this line
-                }
-                },
+              if (selectedView === "TotalBudget") {
+                setDrilldownYear(this.category);
+                setSelectedView("Breakdown");
+                setBreakdownType(null);
+              }
+            },
           },
         },
       },
@@ -222,40 +240,43 @@ export default function CoolDashboard() {
       },
     },
     legend: {
-        enabled: true,
-        itemStyle: { fontWeight: "bold" },
-        },
+      enabled: true,
+      itemStyle: { fontWeight: "bold" },
+    },
 
     series: selectedView === "TotalBudget"
-        ? [
-            {
-                name: "Total Budget",
-                data: mainData.map((d) => d.TotalBudget),
-                color: COLORS.total,
-            },
-            {
-                name: "Resource Budget",
-                data: mainData.map((d) => d.TotalResource),
-                color: COLORS.resource,
-            },
-            {
-                name: "Capital Budget",
-                data: mainData.map((d) => d.TotalCapital),
-                color: COLORS.capital,
-            },
-            ]
+      ? [
+          {
+            name: "Total Budget",
+            data: mainData.map((d) => d.TotalBudget),
+            color: COLORS.total,
+          },
+          {
+            name: "Resource Budget",
+            data: mainData.map((d) => d.TotalResource),
+            color: COLORS.resource,
+          },
+          {
+            name: "Capital Budget",
+            data: mainData.map((d) => d.TotalCapital),
+            color: COLORS.capital,
+          },
+        ]
+      : selectedView === "ResourceBreakdown"
+        ? breakdownType === "Resource"
+          ? resourceCategorySeries
+          : capitalCategorySeries
         : drilldownYear
-            ? drilldownSeries.filter(
-                (s) =>
+          ? drilldownSeries.filter(
+              (s) =>
                 s.id === drilldownYear &&
                 (breakdownType ? s.name === breakdownType : true)
             )
-            : [],
-
-
-
+          : [],
+    
     credits: { enabled: false },
   };
+
 
   const currentYearData = drilldownYear
   ? mainData.find((d) => d.Year === drilldownYear)
@@ -289,70 +310,72 @@ export default function CoolDashboard() {
       </a>.
     </p>
       <div
-        style={{
-          display: "flex",
-          justifyContent: "space-around",
-          marginBottom: 30,
-          gap: 15,
-          flexWrap: "wrap",
-        }}
-      >
-        {[
-          {
-            label: "Total Budget",
-            value: selectedView === "TotalBudget" ? totalBudgetSum : currentYearData.TotalBudget,
-            color: COLORS.total,
-          },
-          {
-            label: "Resource Budget",
-            value: selectedView === "TotalBudget" ? totalResourceSum : currentYearData.TotalResource,
-            color: COLORS.resource,
-          },
-          {
-            label: "Capital Budget",
-            value: selectedView === "TotalBudget" ? totalCapitalSum : currentYearData.TotalCapital,
-            color: COLORS.capital,
-          },
-        ].map(({ label, value, color }) => (
-          <div
-            key={label}
-            style={{
-              flex: "1 1 250px",
-              background: color,
-              color: "white",
-              borderRadius: 8,
-              padding: 20,
-              boxShadow: "0 4px 15px rgba(0,0,0,0.15)",
-              cursor: label === "Total Budget" ? "default" : "pointer",
-              transition: "transform 0.3s",
-              textAlign: "center",
-            }}
-            onClick={() => {
-              if (label === "Total Budget") {
-                setSelectedView("TotalBudget");
-                setDrilldownYear(null);
-                setBreakdownType(null);
-              } else {
-                setSelectedView("Breakdown");
-                setDrilldownYear("2025");
-                setBreakdownType(label === "Resource Budget" ? "Resource" : "Capital");
-              }
-            }}
-            onMouseEnter={(e) => (e.currentTarget.style.transform = "scale(1.05)")}
-            onMouseLeave={(e) => (e.currentTarget.style.transform = "scale(1)")}
-          >
-            <h3 style={{ marginBottom: 10 }}>
-              {label} <br /> {selectedView === "TotalBudget" ? "2010 - 2025" : drilldownYear}
-            </h3>
-            <p style={{ fontSize: 28, fontWeight: "bold", margin: 0 }}>
-              £{value.toLocaleString()}M
-            </p>
-          </div>
-        ))}
+  style={{
+    display: "flex",
+    justifyContent: "space-around",
+    marginBottom: 30,
+    gap: 15,
+    flexWrap: "wrap",
+  }}
+>
+  {[
+    {
+      label: "Total Budget",
+      value: drilldownYear ? currentYearData.TotalBudget : totalBudgetSum,
+      color: COLORS.total,
+    },
+    {
+      label: "Resource Budget",
+      value: drilldownYear ? currentYearData.TotalResource : totalResourceSum,
+      color: COLORS.resource,
+    },
+    {
+      label: "Capital Budget",
+      value: drilldownYear ? currentYearData.TotalCapital : totalCapitalSum,
+      color: COLORS.capital,
+    },
+  ].map(({ label, value, color }) => (
+    <div
+      key={label}
+      style={{
+        flex: "1 1 250px",
+        background: color,
+        color: "white",
+        borderRadius: 8,
+        padding: 20,
+        boxShadow: "0 4px 15px rgba(0,0,0,0.15)",
+        cursor: label === "Total Budget" ? "default" : "pointer",
+        transition: "transform 0.3s",
+        textAlign: "center",
+      }}
+      onClick={() => {
+        if (label === "Total Budget") {
+          setSelectedView("TotalBudget");
+          setDrilldownYear(null);
+          setBreakdownType(null);
+        } else if (label === "Resource Budget") {
+          setSelectedView("ResourceBreakdown");
+          setDrilldownYear(null);
+          setBreakdownType("Resource");
+        } else if (label === "Capital Budget") {
+          setSelectedView("ResourceBreakdown");
+          setDrilldownYear(null);
+          setBreakdownType("Capital");
+        }
+      }}
+      onMouseEnter={(e) => (e.currentTarget.style.transform = "scale(1.05)")}
+      onMouseLeave={(e) => (e.currentTarget.style.transform = "scale(1)")}
+    >
+      <h3 style={{ marginBottom: 10 }}>
+        {label} <br /> {drilldownYear ? drilldownYear : "2010 - 2025"}
+      </h3>
+      <p style={{ fontSize: 28, fontWeight: "bold", margin: 0 }}>
+        £{value.toLocaleString()}M
+      </p>
+    </div>
+  ))}
+</div>
 
-
-
-      </div>
 
       <HighchartsReact key={selectedView} highcharts={Highcharts} options={options}/>
 
