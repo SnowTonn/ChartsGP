@@ -270,10 +270,24 @@ export default function CoolDashboard() {
         fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
       }}
     >
-      <h1 style={{ textAlign: "center", marginBottom: 20, color: COLORS.total }}>
-        Budget Dashboard NI 2010 - 2025
+      <h1 style={{ 
+        textAlign: "center", 
+        marginBottom: 20, 
+        color: COLORS.total 
+      }}>
+        Budget Dashboard Northern Ireland 2010 - 2025
       </h1>
-
+      <p style={{ 
+      textAlign: "center", 
+      fontSize: 14, 
+      color: "#666", 
+      marginBottom: 30 
+    }}>
+      Data sourced from official documents available at&nbsp;
+      <a href="https://www.finance-ni.gov.uk/" target="_blank" rel="noopener noreferrer">
+        Department of Finance Northern Ireland
+      </a>.
+    </p>
       <div
         style={{
           display: "flex",
@@ -284,55 +298,59 @@ export default function CoolDashboard() {
         }}
       >
         {[
-            {
-                label: "Total Budget",
-                value: selectedView === "TotalBudget" ? totalBudgetSum : currentYearData.TotalBudget,
-                color: COLORS.total,
-            },
-            {
-                label: "Resource Budget",
-                value: selectedView === "TotalBudget" ? totalResourceSum : currentYearData.TotalResource,
-                color: COLORS.resource,
-            },
-            {
-                label: "Capital Budget",
-                value: selectedView === "TotalBudget" ? totalCapitalSum : currentYearData.TotalCapital,
-                color: COLORS.capital,
-            },
-            ].map(({ label, value, color }) => (
-            <div
-                key={label}
-                style={{
-                flex: "1 1 250px",
-                background: color,
-                color: "white",
-                borderRadius: 8,
-                padding: 20,
-                boxShadow: "0 4px 15px rgba(0,0,0,0.15)",
-                cursor: label === "Total Budget" ? "default" : "pointer",
-                transition: "transform 0.3s",
-                textAlign: "center",
-                }}
-                onClick={() => {
-                if (label === "Total Budget") {
-                    setSelectedView("TotalBudget");
-                    setDrilldownYear(null);
-                    setBreakdownType(null);
-                } else {
-                    setSelectedView("Breakdown");
-                    setDrilldownYear("2025");
-                    setBreakdownType(label === "Resource Budget" ? "Resource" : "Capital");
-                }
-                }}
-                onMouseEnter={(e) => (e.currentTarget.style.transform = "scale(1.05)")}
-                onMouseLeave={(e) => (e.currentTarget.style.transform = "scale(1)")}
-            >
-                <h3 style={{ marginBottom: 10 }}>{label}</h3>
-                <p style={{ fontSize: 28, fontWeight: "bold", margin: 0 }}>
-                £{value.toLocaleString()}M
-                </p>
-            </div>
-            ))}
+          {
+            label: "Total Budget",
+            value: selectedView === "TotalBudget" ? totalBudgetSum : currentYearData.TotalBudget,
+            color: COLORS.total,
+          },
+          {
+            label: "Resource Budget",
+            value: selectedView === "TotalBudget" ? totalResourceSum : currentYearData.TotalResource,
+            color: COLORS.resource,
+          },
+          {
+            label: "Capital Budget",
+            value: selectedView === "TotalBudget" ? totalCapitalSum : currentYearData.TotalCapital,
+            color: COLORS.capital,
+          },
+        ].map(({ label, value, color }) => (
+          <div
+            key={label}
+            style={{
+              flex: "1 1 250px",
+              background: color,
+              color: "white",
+              borderRadius: 8,
+              padding: 20,
+              boxShadow: "0 4px 15px rgba(0,0,0,0.15)",
+              cursor: label === "Total Budget" ? "default" : "pointer",
+              transition: "transform 0.3s",
+              textAlign: "center",
+            }}
+            onClick={() => {
+              if (label === "Total Budget") {
+                setSelectedView("TotalBudget");
+                setDrilldownYear(null);
+                setBreakdownType(null);
+              } else {
+                setSelectedView("Breakdown");
+                setDrilldownYear("2025");
+                setBreakdownType(label === "Resource Budget" ? "Resource" : "Capital");
+              }
+            }}
+            onMouseEnter={(e) => (e.currentTarget.style.transform = "scale(1.05)")}
+            onMouseLeave={(e) => (e.currentTarget.style.transform = "scale(1)")}
+          >
+            <h3 style={{ marginBottom: 10 }}>
+              {label} <br /> {selectedView === "TotalBudget" ? "2010 - 2025" : drilldownYear}
+            </h3>
+            <p style={{ fontSize: 28, fontWeight: "bold", margin: 0 }}>
+              £{value.toLocaleString()}M
+            </p>
+          </div>
+        ))}
+
+
 
       </div>
 

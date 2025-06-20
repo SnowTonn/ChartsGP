@@ -8,6 +8,7 @@ import Annotations from 'highcharts/modules/annotations';
 
 
 
+
 [Exporting, Accessibility, Drilldown, OfflineExporting, Annotations].forEach((mod) => {
   if (typeof mod === 'function') {
     mod(Highcharts);
