@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import FileUploader from "./components/FileUploader";
 import ChartCreator from "./components/ChartCreator";
 // import ChartList from "./components/ChartList";
-import logo from "./components/assets/FIT.png";
-import logo1 from "./components/assets/FA.png";
+import logo from "./components/assets/LogoEF.png";
+//import logo1 from "./components/assets/FA.png";
 
 function App() {
   const [loadedData, setLoadedData] = useState(null);
@@ -39,11 +39,11 @@ function App() {
             alt="Faculty of Information Technology"
             style={{ height: 60, objectFit: "contain" }}
           />
-          <img
+          {/* <img
             src={logo1}
             alt="Faculty of Administration"
             style={{ height: 60, objectFit: "contain" }}
-          />
+          /> */}
         </div>
         <h1 style={{ fontSize: "1.6rem", margin: "10px 0" }}>
           Excel/CSV Chart Builder
