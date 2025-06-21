@@ -293,22 +293,22 @@ export default function CoolDashboard() {
     >
       <h1 style={{ 
         textAlign: "center", 
-        marginBottom: 20, 
+        marginBottom: 10, 
         color: COLORS.total 
       }}>
-        Budget Dashboard Northern Ireland 2010 - 2025
+        Northern Ireland Budget (2010–2025)
       </h1>
-      <p style={{ 
-      textAlign: "center", 
-      fontSize: 14, 
-      color: "#666", 
-      marginBottom: 30 
-    }}>
-      Data sourced from official documents available at&nbsp;
-      <a href="https://www.finance-ni.gov.uk/" target="_blank" rel="noopener noreferrer">
-        Department of Finance Northern Ireland
-      </a>.
-    </p>
+      <h2 style={{ 
+        textAlign: "center", 
+        marginBottom: 20, 
+        color: COLORS.capital, 
+        fontWeight: "normal" 
+      }}>
+        Interactive Dashboard
+      </h2>
+
+      
+
       <div
   style={{
     display: "flex",
@@ -403,6 +403,26 @@ export default function CoolDashboard() {
       )}
 
       <div style={{ marginTop: 40, textAlign: "center" }}>
+        <p style={{
+          textAlign: "center",
+          fontSize: 14,
+          color: COLORS.total,
+          marginBottom: 30,
+          width: "100%",
+          padding: "0 10px",
+          wordBreak: "break-word",
+          lineHeight: "1.5"
+        }}>
+          Data sourced from official documents available at&nbsp;
+          <a
+            href="https://www.finance-ni.gov.uk/"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{ color: COLORS.resource, textDecoration: "underline" }}
+          >
+            Department of Finance Northern Ireland
+          </a>.
+        </p>
         <Link
           to="/upload"
           style={{
