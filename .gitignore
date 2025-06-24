@@ -1,0 +1,10 @@
+# Ignore node_modules
+/node_modules/
+/AxisNI-frontend/node_modules/
+
+# Ignore Maven/Gradle build output
+/AxisNI-backend/target/
+
+# Ignore IDE-specific files
+.idea/
+*.iml
