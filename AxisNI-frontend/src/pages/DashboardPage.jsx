@@ -3,6 +3,10 @@ import HighchartsReact from "highcharts-react-official";
 import Highcharts from "../components/utils/highcharts-config";
 import { Link } from "react-router-dom";
 
+
+
+
+
 const mainData = [
   { Year: "2010", TotalBudget: 11804.2, TotalResource: 10316.1, TotalCapital: 1488.1 },
   { Year: "2011", TotalBudget: 11520.4, TotalResource: 10329.1, TotalCapital: 1191.3 },
@@ -441,6 +445,8 @@ export default function CoolDashboard() {
         >
           Upload Your Data & Create Charts
         </Link>
+        
+        
       </div>
     </div>
   );

@@ -7,12 +7,19 @@
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
     "@mui/material": "^7.1.1",
+    "@react-google-maps/api": "^2.20.7",
     "axios": "^1.10.0",
     "highcharts": "^12.2.0",
     "highcharts-react-official": "^3.2.2",
+    "leaflet": "^1.9.4",
+    "leaflet.markercluster": "^1.5.3",
+    "maplibre-gl": "^5.6.0",
+    "papaparse": "^5.5.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-grid-layout": "^1.5.1",
+    "react-leaflet": "^4.2.1",
+    "react-leaflet-cluster": "^2.1.0",
     "react-resizable": "^3.0.5",
     "react-rnd": "^10.5.2",
     "react-router-dom": "^6.30.1",
@@ -23,8 +30,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "postinstall": "chmod +x ./node_modules/.bin/react-scripts"
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": [

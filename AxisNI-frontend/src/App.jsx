@@ -5,6 +5,7 @@ import ChartCreator from "./components/ChartCreator";
 import logo from "./components/assets/LogoEF.png";
 //import logo1 from "./components/assets/FA.png";
 
+
 function App() {
   const [loadedData, setLoadedData] = useState(null);
 
