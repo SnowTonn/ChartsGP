@@ -1,0 +1,101 @@
+Rank,SCH0ME,ADDRESS,TOWN,PCON_0ME,EGENDER,AGERANGE,TOTPUPS,NUMBOYS,NUMGIRLS,TPUP,KS2ASS,ATT8SCR,P8PUP,P8MEA,PTL2BASICS_94,EBACCAPS,PTEBACC_E_PTQ_EE,P8MEA_NMOB,P8_BANDING,Latitude,Longitude
+1,"Queen Elizabeth's School, Barnet","Queen's Road, EN5 4DQ",Barnet,Chipping Barnet,BOYS,11-18,1305,1305,0,188,116.5,86.6,169,1.22,100.00%,8.670,100.00%,1.22,Well above average,51.6553463,-0.2128734
+2,The Henrietta Barnett School,"Central Square, NW11 7BN",London,Finchley and Golders Green,GIRLS,11-18,793,0,793,104,117,86.4,88,1.09,99.00%,8.57,98.10%,1.09,Well above average,51.5812815,-0.1886809
+3,St Olave's and St Saviour's Grammar School,"Goddington Lane, BR6 9SH",Orpington,Orpington,BOYS,11-18,1085,931,154,126,115.9,85.8,106,1.27,100.00%,8.45,95.20%,1.27,Well above average,51.3668224,0.1033593
+4,Wilson's School,"Mollison Drive, SM6 9JW",Wallington,Carshalton and Wallington,BOYS,11-18,1313,1313,0,190,115.9,85.6,161,1.27,99.50%,8.51,98.40%,1.27,Well above average,51.3589928,-0.1282249
+5,The Tiffin Girls' School,"Richmond Road, KT2 5PL",Kingston upon Thames,Richmond Park,GIRLS,11-18,1236,0,1236,180,116.4,84.8,152,1.06,100.00%,8.1,76.10%,1.06,Well above average,51.4251983,-0.3030517
+6,Kendrick School,"London Road, RG1 5BN",Reading,Reading Central,GIRLS,11-18,903,0,903,97,116,84.4,90,1.07,100.00%,8.28,92.80%,1.07,Well above average,51.4515379,-0.9658774
+7,"King Edward VI Grammar School, Chelmsford","Broomfield Road, CM1 3SX",Chelmsford,Chelmsford,MIXED,11-18,1134,1044,90,150,115.8,83.7,138,1.11,99.30%,8.31,97.30%,1.11,Well above average,51.7397534,0.4658341
+8,Pate's Grammar School,"Princess Elizabeth Way, GL51 0HG",Cheltenham,Cheltenham,MIXED,11-18,1251,668,583,149,116.3,83.7,117,1.01,99.30%,7.99,73.20%,1.01,Well above average,51.906695,-2.1156684
+9,Colchester Royal Grammar School,"Lexden Road, CO3 3ND",Colchester,Colchester,BOYS,11-18,1018,898,120,124,115.6,83.4,102,1.09,100.00%,7.99,77.40%,1.09,Well above average,51.8868529,0.8868989
+10,King Edward VI Camp Hill School for Boys,"Vicarage Road, B14 7QJ",Birmingham,Birmingham Hall Green and Moseley,BOYS,11-18,1017,1017,0,119,115.5,83.3,101,1.09,100.00%,8.03,85.70%,1.09,Well above average,52.4307253,-1.9037952
+11,Sutton Grammar School,"Manor Lane, SM1 4AS",Sutton,Sutton and Cheam,BOYS,11-18,1038,984,54,135,115.1,82.6,121,1.16,100.00%,7.33,36.30%,1.16,Well above average,51.3651922,-0.1897443
+12,King Edward VI Camp Hill School for Girls,"Vicarage Road, B14 7QJ",Birmingham,Birmingham Hall Green and Moseley,GIRLS,11-18,1108,0,1108,148,115.6,82.3,129,0.96,100.00%,7.96,85.10%,0.96,Well above average,52.4309751,-1.9027397
+13,King Edward VI School,"Chapel Lane, CV37 6BE",Stratford-upon-Avon,Stratford-on-Avon,BOYS,11-18,839,685,154,90,114.6,81.7,73,1.21,100.00%,7.85,85.60%,1.21,Well above average,52.1903563,-1.706995513
+14,Altrincham Grammar School for Girls,"Cavendish Road, WA14 2NL",Altrincham,Altrincham and Sale West,GIRLS,11-18,1368,0,1368,200,115.1,81.6,163,1.01,99.50%,8.12,97.50%,1.01,Well above average,53.3818583,-2.3595955
+15,Nonsuch High School for Girls,"Ewell Road, SM3 8AB",Sutton,Epsom and Ewell,GIRLS,11-18,1522,0,1522,209,115,81.3,195,1.02,99.50%,7.62,69.90%,1.02,Well above average,51.3558096,-0.2241839
+16,The Perse School,"Hills Road, CB2 8QF",Cambridge,South Cambridgeshire,MIXED,3-18,1705,899,806,186,NP,81.2,NP,NP,98.40%,7.79,78.00%,NP,,52.1860843,0.1379446
+17,Reading School,"Erleigh Road, RG1 5LW",Reading,Reading Central,BOYS,11-18,1138,1138,0,150,115.6,81.1,131,0.89,100.00%,8,96.00%,0.89,Well above average,51.4486089,-0.9542481
+18,The Latymer School,"Haselbury Road, N9 9TN",London,Edmonton and Winchmore Hill,MIXED,11-18,1380,777,603,191,116.1,81,178,0.74,99.50%,8,95.80%,0.74,Well above average,51.6257086,-0.0741212
+19,Sutton Coldfield Grammar School for Girls,"Jockey Road, B73 5PT",Sutton Coldfield,Sutton Coldfield,GIRLS,11-18,1204,0,1204,179,114.8,80.9,172,1.05,100.00%,7.5,64.80%,1.05,Well above average,52.5541219,-1.8297841
+20,Colchester County High School for Girls,"Norman Way, CO3 3US",Colchester,Colchester,GIRLS,11-18,1183,0,1183,159,115.1,80.8,133,0.99,100.00%,7.76,84.30%,0.98,Well above average,51.8857277,0.8753857
+21,Chelmsford County High School for Girls,"Broomfield Road, CM1 1RW",Chelmsford,Chelmsford,GIRLS,11-18,1186,0,1186,151,115.8,80.6,135,0.76,100.00%,7.96,98.00%,0.76,Well above average,51.7432068,0.4673207
+22,Newstead Wood School,"Avebury Road, BR6 9SA",Orpington,Orpington,GIRLS,11-18,1264,98,1166,159,114.5,80.2,142,1.05,100.00%,7.36,56.60%,1.05,Well above average,51.3677585,0.0770177
+23,The Blue Coat School,"Church Road, L15 9EE",Liverpool,Liverpool Wavertree,MIXED,11-18,1252,593,659,179,115.4,80.1,167,0.77,99.40%,7.86,99.40%,0.76,Well above average,51.2539498,-1.1138215
+24,Altrincham Grammar School for Boys,"Marlborough Road, WA14 2RS",Altrincham,Altrincham and Sale West,BOYS,11-18,1389,1389,0,182,113.6,79.9,149,1.32,100.00%,7.37,58.20%,1.31,Well above average,53.3761553,-2.3513821
+25,Stratford Girls' Grammar School,"Shottery Manor, CV37 9HA",Stratford-upon-Avon,Stratford-on-Avon,GIRLS,11-18,814,0,814,120,114.5,79.9,95,1.07,100.00%,7.31,61.70%,1.07,Well above average,52.1902811,-1.7247358
+26,Colyton Grammar School,"Whitwell Lane, EX24 6HN",Colyton,Honiton and Sidmouth,MIXED,11-18,1061,584,477,150,114.7,79.8,134,0.99,99.30%,7.9,95.30%,0.99,Well above average,50.7275442,-3.0719598
+27,Wallington High School for Girls,"Woodcote Road, SM6 0PH",Wallington,Carshalton and Wallington,GIRLS,11-18,1546,0,1546,211,114.6,79.4,188,0.92,99.50%,7.23,60.20%,0.91,Well above average,51.3481864,-0.1487403
+28,Tonbridge Grammar School,"Deakin Leas, TN9 2JR",Tonbridge,Tonbridge,GIRLS,11-18,1136,28,1108,175,115,79.4,133,0.75,100.00%,7.86,97.10%,0.75,Well above average,51.1839103,0.2751453
+29,St Michael's Catholic Grammar School,"Nether Street, N12 7NJ",London,Finchley and Golders Green,GIRLS,11-18,856,38,818,128,114.5,79.3,125,0.98,99.20%,7.46,72.70%,0.98,Well above average,51.6146118,-0.1809616
+30,Michaela Community School,"North End Road, HA9 0UU",London,Brent West,MIXED,11-19,723,365,358,116,107.8,79.2,103,2.56,97.40%,7.73,81.00%,2.57,Well above average,51.5627729,-0.2789269
+31,Tiffin School,"Queen Elizabeth Road, KT2 6RL",Kingston upon Thames,Kingston and Surbiton,BOYS,11-18,1444,1282,162,185,115,79.2,169,0.86,100.00%,7.79,93.00%,0.86,Well above average,51.4117451,-0.2960951
+32,Heckmondwike Grammar School,"High Street, WF16 0AH",Heckmondwike,Spen Valley,MIXED,11-18,1474,777,697,207,114.2,78.5,199,1,99.50%,6.88,35.70%,1,Well above average,53.7078839,-1.6687953
+33,The Judd School,"Brook Street, TN9 2PN",Tonbridge,Tonbridge,BOYS,11-18,1502,1314,188,189,114.4,78.5,140,0.85,98.40%,7.37,64.60%,0.85,Well above average,51.1881248,0.264368
+34,Heritage Academy,"327 Moseley Road, B12 0DX",Birmingham,Birmingham Hall Green and Moseley,BOYS,11-16,65,65,0,10,NP,78.4,NP,NP,100.00%,7.75,100.00%,NP,,33.4141932,-111.8317189
+35,Dartford Grammar School,"West Hill, DA1 2HW",Dartford,Dartford,BOYS,11-18,1539,1298,241,184,113.5,78.4,175,1.11,100.00%,7.83,100.00%,1.11,Well above average,51.4442854,0.2050657
+36,Woodford County High School,"High Road, IG8 9LA",Woodford Green,Chingford and Woodford Green,GIRLS,11-18,1238,0,1238,179,114.8,78.3,165,0.79,100.00%,7.76,98.90%,0.79,Well above average,38.0427026,-84.748047
+37,Dr Challoner's High School,"Cokes Lane, HP7 9QB",Amersham,Chesham and Amersham,GIRLS,11-18,1315,0,1315,180,113.4,78.2,138,1.11,100.00%,7.67,97.20%,1.11,Well above average,51.6673837,-0.5703936
+38,Wallington County Grammar School,"Croydon Road, SM6 7PH",Wallington,Carshalton and Wallington,BOYS,11-18,1098,1065,33,147,113.9,77.8,130,0.95,98.60%,7.2,68.70%,0.95,Well above average,51.3692254,-0.1488237
+39,Upton Court Grammar School,"Lascelles Road, SL3 7PR",Slough,Slough,MIXED,11-18,1159,637,522,165,114.5,77.6,156,0.85,99.40%,7.59,98.20%,0.85,Well above average,51.5052442,-0.5769475
+40,Dr Challoner's Grammar School,"Chesham Road, HP6 5HA",Amersham,Chesham and Amersham,BOYS,11-18,1370,1280,90,186,112.6,77.5,142,1.18,100.00%,7.51,88.20%,1.18,Well above average,51.6760251,-0.6095188
+41,Ilford County High School,"Fremantle Road, IG6 2JB",Ilford,Ilford North,BOYS,11-18,1138,1138,0,178,114.1,77.4,164,0.87,99.40%,7.54,98.30%,0.87,Well above average,51.5919761,0.0769429
+42,King Edward VI Handsworth School,"Rose Hill Road, B21 9AR",Birmingham,Birmingham Perry Barr,GIRLS,11-18,1284,0,1284,158,114.3,77.3,147,0.8,100.00%,7.32,84.20%,0.8,Well above average,52.5021559,-1.923182
+43,Westcliff High School for Boys Academy,"Kenilworth Gardens, SS0 0BP",Westcliff-on-Sea,Southend West and Leigh,BOYS,11-18,1281,1216,65,181,113.8,77.3,166,0.93,100.00%,7.52,95.60%,0.93,Well above average,51.5530036,0.6693408
+44,St Helen and St Katharine,"Faringdon Road, OX14 1BE",Abingdon,Oxford West and Abingdon,GIRLS,9-18,716,0,716,104,NP,77.2,NP,NP,98.10%,7.02,42.30%,NP,,51.6764567,-1.2964149
+45,St Helen's School,"Eastbury Road, HA6 3AS",Northwood,"Ruislip, Northwood and Pinner",GIRLS,3-18,1211,0,1211,104,NP,77.1,NP,NP,100.00%,6.35,10.60%,NP,,51.61366716,-0.421826681
+46,King Edward VI Five Ways School,"Scotland Lane, B32 4BT",Birmingham,Birmingham Edgbaston,MIXED,11-18,1301,871,430,179,114.9,77.1,164,0.68,100.00%,7.54,98.30%,0.66,Well above average,52.431819,-1.9989247
+47,Cheltenham Ladies' College,"Bayshill Road, GL50 3EP",Cheltenham,Cheltenham,GIRLS,11-18,851,0,851,134,NP,77.1,NP,NP,95.50%,6.87,54.50%,NP,,51.897779,-2.081343
+48,Lawrence Sheriff School,"Clifton Road, CV21 3AG",Rugby,Rugby,BOYS,11-18,1142,1020,122,118,113.8,77.1,111,0.89,99.20%,7.3,79.70%,0.87,Well above average,52.3709915,-1.2551402
+49,Denmark Road High School,"Denmark Road, GL1 3JN",Gloucester,Gloucester,GIRLS,11-18,974,24,950,152,113.7,77,133,0.93,100.00%,7.23,70.40%,0.93,Well above average,51.8728061,-2.2367139
+50,Westcliff High School for Girls,"Kenilworth Gardens, SS0 0BS",Westcliff-on-Sea,Southend West and Leigh,GIRLS,11-18,1300,40,1260,172,113.8,76.9,163,0.9,100.00%,7.46,94.80%,0.9,Well above average,51.5525678,0.6677567
+51,Sir Thomas Rich's School,"Oakleaze, GL2 0LF",Gloucester,Tewkesbury,BOYS,11-18,1268,1084,184,159,113.7,76.9,137,0.91,100.00%,7.03,53.50%,0.91,Well above average,51.8730146,-2.2057154
+52,Chesham Grammar School,"White Hill, HP5 1BA",Chesham,Chesham and Amersham,MIXED,11-18,1317,656,661,181,113.8,76.7,152,0.84,100.00%,7.51,90.60%,0.84,Well above average,51.7092493,-0.6004639
+53,Langley Grammar School,"Reddington Drive, SL3 7QS",Langley,Windsor,MIXED,11-18,1284,705,579,181,114.4,76.7,175,0.75,100.00%,7.17,65.70%,0.75,Well above average,51.499199,-0.5522465
+54,St Ber0rd's Catholic Grammar School,"1 Langley Road, SL3 7AF",Slough,Slough,MIXED,11-18,1129,615,514,157,113.5,76.7,151,0.93,100.00%,7.35,96.20%,0.93,Well above average,51.50570571,-0.573572169
+55,Beaconsfield High School,"Wattleton Road, HP9 1RR",Beaconsfield,Beaconsfield,GIRLS,11-18,1249,0,1249,180,113.3,76.5,150,0.95,100.00%,7.02,67.80%,0.95,Well above average,51.6036445,-0.6437273
+56,Loreto Grammar School,"Dunham Road, WA14 4AH",Altrincham,Altrincham and Sale West,GIRLS,11-18,1027,0,1027,157,113.4,76.3,130,1.06,100.00%,7.24,82.20%,1.06,Well above average,53.3883975,-2.3568896
+57,Aylesbury High School,"Walton Road, HP21 7SX",Aylesbury,Aylesbury,GIRLS,11-18,1322,0,1322,183,113.9,76.3,170,0.81,99.50%,7.16,67.20%,0.81,Well above average,51.8125508,-0.8030055
+58,Townley Grammar School,"Townley Road, DA6 7AB",Bexleyheath,Bexleyheath and Crayford,GIRLS,11-18,1602,99,1503,219,114.5,76.2,212,0.66,99.50%,6.88,60.70%,0.66,Well above average,51.4505566,0.1410445
+59,Chislehurst and Sidcup Grammar School,"Hurst Road, DA15 9AG",Sidcup,Old Bexley and Sidcup,MIXED,11-18,1457,864,593,190,113.9,76,175,0.82,100.00%,7.39,97.90%,0.84,Well above average,51.4353617,0.1081404
+60,Urmston Grammar Academy,"Newton Road, M41 5UG",Manchester,Stretford and Urmston,MIXED,11-18,1101,597,504,150,113.5,75.9,141,0.88,100.00%,7.39,98.70%,0.85,Well above average,53.4504966,-2.3608063
+61,Bishop Vesey's Grammar School,"Lichfield Road, B74 2NH",Sutton Coldfield,Sutton Coldfield,BOYS,11-18,1379,1266,113,191,114,75.8,177,0.75,100.00%,7.37,93.20%,0.73,Well above average,52.5690392,-1.8215356
+62,Southend High School for Girls,"Southchurch Boulevard, SS2 4UZ",Southend-on-Sea,Southend East and Rochford,GIRLS,11-18,1238,51,1187,178,114,75.8,164,0.74,100.00%,7.04,69.10%,0.74,Well above average,51.5416849,0.7448955
+63,Manchester High School for Girls,"Grangethorpe Road, M14 6HS",Manchester,Manchester Rusholme,GIRLS,4-18,991,0,991,114,NP,75.7,NP,NP,99.10%,7.13,67.50%,NP,,53.446607,-2.222939
+64,Aylesbury Grammar School,"Walton Road, HP21 7RP",Aylesbury,Aylesbury,BOYS,11-18,1336,1336,0,186,113.4,75.7,162,0.86,99.50%,7.08,80.10%,0.86,Well above average,51.8140588,-0.8013895
+65,The Harrodian School,"Lonsdale Road, SW13 9QN",London,Richmond Park,MIXED,4-18,1038,540,498,98,NP,75.6,NP,NP,100.00%,7.05,66.30%,NP,,51.4817443,-0.2469094
+66,Sale Grammar School,"Marsland Road, M33 3NH",Sale,Wythenshawe and Sale East,MIXED,11-18,1333,731,602,189,113.7,75.5,169,0.8,99.50%,7.14,81.00%,0.79,Well above average,53.4178094,-2.3152591
+67,Wycombe High School,"Marlow Road, HP11 1TB",High Wycombe,Wycombe,GIRLS,11-18,1322,0,1322,180,113.3,75.5,165,0.9,99.40%,7.33,98.30%,0.9,Well above average,51.6196385,-0.7621338
+68,Herschel Grammar School,"Northampton Avenue, SL1 3BW",Slough,Slough,MIXED,11-18,1057,617,440,154,113.8,75.4,144,0.76,100.00%,7.21,82.50%,0.76,Well above average,51.5195208,-0.6124642
+69,Devonport High School for Girls,"Lyndhurst Road, PL2 3DL",Plymouth,Plymouth Moor View,GIRLS,11-18,860,20,840,121,113.7,75.4,117,0.78,100.00%,7.16,86.80%,0.78,Well above average,50.3925932,-4.1517606
+70,Dartford Grammar School for Girls,"Shepherds Lane, DA1 2NT",Dartford,Dartford,GIRLS,11-18,1245,36,1209,179,113.4,75.3,173,0.82,100.00%,7.25,88.30%,0.82,Well above average,51.4433809,0.2034408
+71,"The Royal Grammar School, High Wycombe","Amersham Road, HP13 6QT",High Wycombe,Wycombe,BOYS,11-18,1418,1418,0,202,112,75.1,182,1.13,99.50%,7.23,86.60%,1.13,Well above average,51.6411427,-0.7385954
+72,South Wilts Grammar School,"Stratford Road, SP1 3JJ",Salisbury,Salisbury,GIRLS,11-18,1130,103,1027,160,113.3,75,134,0.79,99.40%,6.78,56.90%,0.78,Well above average,51.0795087,-1.7997638
+73,Stroud High School,"Beards Lane, GL5 4HF",Stroud,Stroud,GIRLS,11-18,1095,42,1053,159,113.1,74.9,145,0.85,99.40%,6.72,45.30%,0.87,Well above average,35.7522819,-96.6388016
+74,Bexley Grammar School,"Danson Lane, DA16 2BL",Welling,Old Bexley and Sidcup,MIXED,11-18,1478,944,534,223,114.6,74.7,214,0.49,99.60%,7.35,98.70%,0.49,Above average,51.4565262,0.1084864
+75,Queen Mary's Grammar School,"Sutton Road, WS1 2PG",Walsall,Walsall and Bloxwich,BOYS,11-18,1344,1196,148,150,113.9,74.3,145,0.6,100.00%,7.21,90.70%,0.6,Well above average,52.5782699,-1.966488
+76,Wolverhampton Girls' High School,"Tettenhall Road, WV6 0BY",Wolverhampton,Wolverhampton West,GIRLS,11-18,1178,0,1178,145,114.2,74.2,138,0.54,99.30%,7.07,74.50%,0.54,Well above average,52.5910785,-2.1555177
+77,The Skinners' School,"St John's Road, TN4 9PG",Tunbridge Wells,Tunbridge Wells,BOYS,11-18,1118,1118,0,159,112.3,74.1,135,0.99,100.00%,7.21,87.40%,0.99,Well above average,51.1422402,0.2606007
+78,Southend High School for Boys,"Prittlewell Chase, SS0 0RG",Southend-on-Sea,Southend West and Leigh,BOYS,11-18,1340,1226,114,180,113.2,73.9,170,0.74,100.00%,6.58,48.90%,0.75,Well above average,51.5538027,0.6953644
+79,Rugby High School,"Longrood Road, CV22 7RE",Rugby,Rugby,GIRLS,11-18,935,56,879,117,113.7,73.9,105,0.66,98.30%,6.88,59.80%,0.66,Well above average,48.3594456,-99.9939307
+80,Stretford Grammar School,"Granby Road, M32 8JB",Manchester,Stretford and Urmston,MIXED,11-18,942,507,435,158,112.8,73.8,156,0.8,99.40%,6.93,65.80%,0.8,Well above average,53.4437092,-2.2982653
+81,Sir William Borlase's Grammar School,"West Street, SL7 2BR",Marlow,Beaconsfield,MIXED,11-18,1191,585,606,143,113.9,73.8,121,0.56,99.30%,7.1,79.70%,0.56,Well above average,51.5702591,-0.7812075
+82,Saint Ambrose College,"Hale Road, WA15 0HE",Altrincham,Altrincham and Sale West,BOYS,11-18,1068,1068,0,178,112,73.7,151,1.04,99.40%,6.61,47.20%,1.04,Well above average,53.3714882,-2.3204018
+83,Lancaster Girls' Grammar School,"Regent Street, LA1 1SF",Lancaster,Lancaster and Wyre,GIRLS,11-18,1002,0,1002,144,113.3,73.7,140,0.69,100.00%,7.05,81.30%,0.69,Well above average,54.0457212,-2.8035487
+84,Northwood College for Girls GDST,"Maxwell Road, HA6 2YE",Northwood,"Ruislip, Northwood and Pinner",GIRLS,3-19,883,0,883,74,NP,73.6,NP,NP,100.00%,6.37,28.40%,NP,Well above average,51.6099311,-0.4279169
+85,Wimbledon High School GDST,"Mansel Road, SW19 4AB",Wimbledon,Wimbledon,GIRLS,4-19,1051,0,1051,112,NP,73.5,NP,NP,100.00%,5.33,0.00%,NP,Well above average,51.4227215,-0.2109871
+86,Dame Alice Owen's School,"Dugdale Hill Lane, EN6 2DU",Potters Bar,Hertsmere,MIXED,11-18,1479,732,747,210,112.4,73.5,180,0.92,93.30%,7.04,77.10%,0.92,Well above average,51.6913398,-0.2072928
+87,Bournemouth School,"East Way, BH8 9PY",Bournemouth,Bournemouth East,BOYS,11-18,1230,1180,50,180,113,73.3,161,0.71,100.00%,6.99,82.80%,0.71,Well above average,50.7485637,-1.8584767
+88,John Hampden Grammar School,"Marlow Hill, HP11 1SZ",High Wycombe,Wycombe,BOYS,11-18,1258,1258,0,182,112.4,73.2,171,0.84,98.90%,6.88,73.60%,0.86,Well above average,51.6171016,-0.7630006
+89,Newport Girls' High School Academy,"Wellington Road, TF10 7HL",Newport,The Wrekin,GIRLS,11-18,786,0,786,88,114,73.2,83,0.49,100.00%,6.99,72.70%,0.46,Above average,52.7629957,-2.3810988
+90,Alcester Grammar School,"Birmingham Road, B49 5ED",Alcester,Stratford-on-Avon,MIXED,11-18,1292,787,505,153,113.7,73.2,146,0.56,100.00%,7.09,85.00%,0.56,Well above average,52.2183441,-1.875018
+91,Royal Latin School,"Chandos Road, MK18 1AX",Buckingham,Buckingham and Bletchley,MIXED,11-18,1312,688,624,170,113.3,73.1,153,0.59,98.80%,6.73,66.50%,0.6,Well above average,51.9940409,-0.988737
+92,Clitheroe Royal Grammar School,"York Street, BB7 2DJ",Clitheroe,Pendle and Clitheroe,MIXED,11-18,1441,727,714,150,113.5,72.8,140,0.55,99.30%,6.83,73.30%,0.53,Well above average,53.8798452,-2.3803837
+93,The Crossley Heath School,"Savile Park, HX3 0HG",Halifax,Halifax,MIXED,11-18,1133,610,523,179,113.8,72.6,164,0.49,100.00%,6.93,81.60%,0.49,Above average,53.7114894,-1.8777723
+94,Brondesbury College London,"8 Brondesbury Park, NW6 7BT",London,Brent East,BOYS,11-16,124,124,0,21,NP,72.5,NP,NP,100.00%,6.46,47.60%,NP,Well above average,51.5424199,-0.2125811
+95,Bishop Wordsworth's Church of England Grammar School,"Exeter Street, SP1 2ED",Salisbury,Salisbury,BOYS,11-18,1184,1049,135,155,113.1,72.3,129,0.55,99.40%,6.44,37.40%,0.55,Well above average,51.0642879,-1.7933847
+96,North Bridge House Senior Canonbury School,"6-9 Canonbury Place, N1 2NQ",London,Islington South and Finsbury,MIXED,11-18,223,146,77,34,NP,72.1,NP,NP,100.00%,6.84,58.80%,NP,Well above average,51.5444381,-0.098071
+97,Queen Mary's High School,"Upper Forster Street, WS4 2AE",Walsall,Walsall and Bloxwich,GIRLS,11-18,937,10,927,148,113.3,72.1,146,0.55,99.30%,7.06,87.20%,0.58,Well above average,19.2946375,72.8607014
+98,Beths Grammar School,"Hartford Road, DA5 1NE",Bexley,Old Bexley and Sidcup,BOYS,11-18,1672,1464,208,191,113.4,72,188,0.53,99.50%,6.42,47.10%,0.53,Well above average,51.4467473,0.1509923
+99,King Edward VI Handsworth Grammar School for Boys,"Grove Lane, B21 9ET",Birmingham,Birmingham Perry Barr,BOYS,11-18,1046,1025,21,150,112.2,72,143,0.78,96.70%,6.35,32.70%,0.77,Well above average,52.5046208,-1.9333884
+100,Bacup and Rawtenstall Grammar School,"Glen Road, BB4 7BJ",Rossendale,Rossendale and Darwen,MIXED,11-18,1121,577,544,174,114,72,169,0.36,99.40%,7.06,97.10%,NP,Above average,53.6936454,-2.248093
