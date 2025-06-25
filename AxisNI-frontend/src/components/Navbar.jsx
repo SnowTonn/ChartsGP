@@ -60,6 +60,7 @@ const Navbar = () => {
       </NavLink>
 
       <NavLink
+      
         to="/schools-map"
         style={({ isActive }) =>
           isActive ? { ...linkStyle, ...activeStyle } : linkStyle
@@ -69,8 +70,13 @@ const Navbar = () => {
           (e.currentTarget.style.backgroundColor = e.currentTarget.getAttribute("aria-current") === "page" ? "#2a9d8f" : "#264653")
         }
       >
-        The best schools in England (will add)
+        The best schools in England
+        <span style={{ display: "block", fontSize: "0.5em" }}>
+          (will update 27/06/2025)
+        </span>
       </NavLink>
+
+
     </nav>
   );
 };

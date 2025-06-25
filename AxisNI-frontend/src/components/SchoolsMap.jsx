@@ -7,80 +7,18 @@ export default function SchoolsMap() {
   const mapContainer = useRef(null);
   const map = useRef(null);
   const [schools, setSchools] = useState([]);
-  const [filterType, setFilterType] = useState("All");
+  //const [filterType, setFilterType] = useState("All"); // Assuming no 'Type' in new CSV, can remove or repurpose
   const [filterCity, setFilterCity] = useState("All");
   const [searchName, setSearchName] = useState("");
-  const [pupilsRange, setPupilsRange] = useState([0, 2000]);
-  const [grade5Range, setGrade5Range] = useState([30, 100]);
-  const [rankRange, setRankRange] = useState([1, 100]); // <-- Rank filter
+  const [pupilsMax, setPupilsMax] = useState(2000);
+  const [grade5Max, setGrade5Max] = useState(100);
+  const [rankMin, setRankMin] = useState(1);
+  const [rankMax, setRankMax] = useState(100);
+  const [uniqueCities, setUniqueCities] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
-  const parseCoordinate = (coord) => {
-    if (!coord) return null;
-    let value = parseFloat(coord);
-    if (coord.includes("S") || coord.includes("W")) value *= -1;
-    return value;
-  };
-
-  useEffect(() => {
-    Papa.parse("/data/DataSchools10.csv", {
-      download: true,
-      header: true,
-      complete: (results) => {
-        const cleaned = results.data
-          .map((row) => {
-            const lat = parseCoordinate(row["Latitude"]);
-            const lng = parseCoordinate(row["Longitude"]);
-            const progress = parseFloat(row["Progress 8 Score"]);
-            const pupils = parseInt(row["Pupils KS4"]);
-            const rank = parseInt(row["Rank"]); // <-- Parse Rank
-
-            if (!lat || !lng) return null;
-            return {
-              rank,
-              name: row["School Name"],
-              type: row["Type"],
-              city: row["City"],
-              address: row["Address"],
-              pupilsKS4: pupils,
-              pupilsMeasured: row["Pupils Measured"],
-              progress8Score: progress,
-              progress8Description: row["Progress 8 Description"],
-              enteringEBacc: row["Entering EBacc"],
-              stayingInEducation: row["Staying in Education/Employment"],
-              grade5Plus: row["Grade 5+ English & Maths (%)"],
-              attainment8: row["Attainment 8"],
-              ebaccScore: row["EBacc Avg Point Score"],
-              lat,
-              lng,
-            };
-          })
-          .filter(Boolean);
-        setSchools(cleaned);
-
-        // Set default rankRange max based on data
-        const maxRank = Math.max(...cleaned.map(s => s.rank));
-        setRankRange([1, maxRank]);
-      },
-    });
-  }, []);
-
-  const uniqueCities = [...new Set(schools.map((s) => s.city).filter(Boolean))];
-  const maxRank = Math.max(...schools.map(s => s.rank), 100);
-
-  const filteredSchools = schools.filter((s) => {
-    return (
-      (filterType === "All" || s.type === filterType) &&
-      (filterCity === "All" || s.city === filterCity) &&
-      s.name.toLowerCase().includes(searchName.toLowerCase()) &&
-      parseFloat(s.grade5Plus) >= grade5Range[0] &&
-      parseFloat(s.grade5Plus) <= grade5Range[1] &&
-      s.pupilsKS4 >= pupilsRange[0] &&
-      s.pupilsKS4 <= pupilsRange[1] &&
-      s.rank >= rankRange[0] &&
-      s.rank <= rankRange[1]
-    );
-  });
-
+  // Initialize map only once
   useEffect(() => {
     if (map.current) return;
 
@@ -124,10 +62,81 @@ export default function SchoolsMap() {
       center: [-1, 52.5],
       zoom: 6,
     });
+
+    return () => {
+      if (map.current && map.current.markers) {
+        map.current.markers.forEach((m) => m.remove());
+        map.current.markers = [];
+      }
+      map.current?.remove();
+    };
   }, []);
 
+  // Load CSV once and set schools state
   useEffect(() => {
-    if (!map.current || !filteredSchools.length) return;
+    setLoading(true);
+    setError(null);
+
+    Papa.parse("/data/top100schools.csv", {
+      download: true,
+      header: true,
+      skipEmptyLines: true,
+      complete: (results) => {
+        // Transform data as needed
+        const data = results.data.map((row) => ({
+          rank: parseInt(row["Rank"], 10),
+          name: row["SCH0ME"],
+          address: row["ADDRESS"],
+          city: row["TOWN"],
+          pupilsKS4: parseInt(row["TOTPUPS"], 10), // Using total pupils as approximation
+          grade5Plus: parseFloat(row["PTL2BASICS_94"]) || 0, // Assuming PTL2BASICS_94 is % with Grade 5+ equiv
+          latitude: parseFloat(row["Latitude"]),
+          longitude: parseFloat(row["Longitude"]),
+          gender: row["EGENDER"],
+          ageRange: row["AGERANGE"],
+          progress8Score: row["P8MEA"], // Just passing string, can parseFloat if needed
+          progress8Description: row["P8_BANDING"],
+        }));
+
+        setSchools(data);
+
+        // Extract unique cities
+        const cities = [...new Set(data.map((s) => s.city).filter(Boolean))];
+        setUniqueCities(cities);
+
+        // Set max rank dynamically
+        const maxRankInData = data.length
+          ? Math.max(...data.map((s) => s.rank || 0))
+          : 100;
+        setRankMax(maxRankInData);
+
+        setLoading(false);
+      },
+      error: (err) => {
+        setError("Failed to load CSV data: " + err.message);
+        setLoading(false);
+      },
+    });
+  }, []);
+
+  // Filter schools based on filter state
+  const filteredSchools = schools.filter((school) => {
+    if (filterCity !== "All" && school.city !== filterCity) return false;
+    if (
+      searchName.trim() !== "" &&
+      !school.name.toLowerCase().includes(searchName.trim().toLowerCase())
+    )
+      return false;
+    if (school.pupilsKS4 > pupilsMax) return false;
+    if (school.grade5Plus > grade5Max) return false;
+    if (school.rank < rankMin || school.rank > rankMax) return false;
+
+    return true;
+  });
+
+  // Manage markers on map when filtered schools data changes
+  useEffect(() => {
+    if (!map.current) return;
 
     if (map.current.markers) {
       map.current.markers.forEach((m) => m.remove());
@@ -135,24 +144,27 @@ export default function SchoolsMap() {
     map.current.markers = [];
 
     filteredSchools.forEach((school) => {
+      if (!school.latitude || !school.longitude) return;
+
+      const lat = school.latitude;
+      const lng = school.longitude;
+
+      if (isNaN(lat) || isNaN(lng)) return;
+
       const popup = new maplibregl.Popup({ offset: 25 }).setHTML(
         `<strong>${school.name}</strong><br/>
          <b>Rank:</b> ${school.rank}<br/>
-         <b>Type:</b> ${school.type}<br/>
+         <b>Gender:</b> ${school.gender}<br/>
+         <b>Age Range:</b> ${school.ageRange}<br/>
          <b>City:</b> ${school.city}<br/>
          <b>Address:</b> ${school.address}<br/>
-         <b>Pupils KS4:</b> ${school.pupilsKS4}<br/>
-         <b>Pupils Measured:</b> ${school.pupilsMeasured}<br/>
-         <b>Progress 8 Score:</b> ${school.progress8Score} (${school.progress8Description})<br/>
-         <b>Entering EBacc:</b> ${school.enteringEBacc}<br/>
-         <b>Staying in Education:</b> ${school.stayingInEducation}<br/>
-         <b>Grade 5+ English & Maths:</b> ${school.grade5Plus}<br/>
-         <b>Attainment 8:</b> ${school.attainment8}<br/>
-         <b>EBacc Avg Point Score:</b> ${school.ebaccScore}`
+         <b>Pupils:</b> ${school.pupilsKS4}<br/>
+         <b>Grade 5+ English & Maths (%):</b> ${school.grade5Plus}<br/>
+         <b>Progress 8 Score:</b> ${school.progress8Score} (${school.progress8Description})`
       );
 
       const marker = new maplibregl.Marker({ color: "#d33" })
-        .setLngLat([school.lng, school.lat])
+        .setLngLat([lng, lat])
         .setPopup(popup)
         .addTo(map.current);
 
@@ -160,9 +172,20 @@ export default function SchoolsMap() {
     });
   }, [filteredSchools]);
 
+  function sanitizeRankInput(value, fallback, min, max) {
+    let val = value.toString().replace(/[^\d]/g, "");
+    if (val === "") return fallback;
+    let intVal = parseInt(val, 10);
+    if (isNaN(intVal)) intVal = fallback;
+    if (intVal < min) intVal = min;
+    if (intVal > max) intVal = max;
+    return intVal;
+  }
+
   return (
     <div style={{ maxWidth: "1100px", margin: "auto" }}>
       <h2>UK Schools Map</h2>
+
       <div
         style={{
           display: "flex",
@@ -171,7 +194,8 @@ export default function SchoolsMap() {
           marginBottom: "1rem",
         }}
       >
-        <div>
+        {/* You can remove Type filter if not needed */}
+        {/* <div>
           <label>Type:</label>
           <br />
           <select
@@ -182,7 +206,8 @@ export default function SchoolsMap() {
             <option value="Academy">Academy</option>
             <option value="Independent">Independent</option>
           </select>
-        </div>
+        </div> */}
+
         <div>
           <label>City:</label>
           <br />
@@ -198,6 +223,7 @@ export default function SchoolsMap() {
             ))}
           </select>
         </div>
+
         <div>
           <label>School Name:</label>
           <br />
@@ -208,67 +234,72 @@ export default function SchoolsMap() {
             placeholder="Search..."
           />
         </div>
+
         <div>
-          <label>Grade 5+ English & Maths (%):</label>
+          <label>Grade 5+ English & Maths Max (%):</label>
           <br />
           <input
-            type="range"
-            min="30"
-            max="100"
-            step="10"
-            value={grade5Range[1]}
-            onChange={(e) => setGrade5Range([30, parseInt(e.target.value)])}
+            type="number"
+            min={0}
+            max={100}
+            value={grade5Max}
+            onChange={(e) => {
+              const val = e.target.value;
+              setGrade5Max(val === "" ? 0 : Math.min(100, Math.max(0, parseFloat(val))));
+            }}
           />
-          <div>
-            {grade5Range[0]}% to {grade5Range[1]}%
-          </div>
-        </div>
-        <div>
-          <label>Pupils KS4 Max:</label>
-          <br />
-          <input
-            type="range"
-            min="0"
-            max="2000"
-            step="10"
-            value={pupilsRange[1]}
-            onChange={(e) => setPupilsRange([0, parseInt(e.target.value)])}
-          />
-          <div>
-            {pupilsRange[0]} to {pupilsRange[1]}
-          </div>
         </div>
 
-        {/* Rank filter inputs */}
+        <div>
+          <label>Pupils Max:</label>
+          <br />
+          <input
+            type="number"
+            min={0}
+            max={2000}
+            value={pupilsMax}
+            onChange={(e) => {
+              const val = e.target.value;
+              setPupilsMax(val === "" ? 0 : Math.min(2000, Math.max(0, parseInt(val))));
+            }}
+          />
+        </div>
+
         <div>
           <label>Rank Range:</label>
           <br />
           <input
             type="number"
             min={1}
-            max={maxRank}
-            value={rankRange[0]}
+            max={rankMax}
+            value={rankMin}
             onChange={(e) => {
-              const val = parseInt(e.target.value) || 1;
-              if (val <= rankRange[1]) setRankRange([val, rankRange[1]]);
+              const val = sanitizeRankInput(e.target.value, 1, 1, rankMax);
+              setRankMin(val);
             }}
             style={{ width: "60px", marginRight: "10px" }}
           />
           to
           <input
             type="number"
-            min={1}
-            max={maxRank}
-            value={rankRange[1]}
+            min={rankMin}
+            max={rankMax}
+            value={rankMax}
             onChange={(e) => {
-              const val = parseInt(e.target.value) || 1;
-              if (val >= rankRange[0]) setRankRange([rankRange[0], val]);
+              const val = sanitizeRankInput(e.target.value, rankMax, rankMin, 1000);
+              setRankMax(val);
             }}
             style={{ width: "60px", marginLeft: "10px" }}
           />
         </div>
       </div>
-      <p><strong>{filteredSchools.length}</strong> schools displayed</p>
+
+      {loading && <p>Loading schools data...</p>}
+      {error && <p style={{ color: "red" }}>{error}</p>}
+
+      <p>
+        <strong>{filteredSchools.length}</strong> schools displayed
+      </p>
       <p>
         <strong>
           {filteredSchools.reduce((total, school) => total + (school.pupilsKS4 || 0), 0)}
@@ -277,7 +308,7 @@ export default function SchoolsMap() {
       </p>
       <div
         ref={mapContainer}
-        style={{ height: "600px", width: "100%", borderRadius: "8px" }}
+        style={{ height: "600px", width: "100%", border: "1px solid #aaa" }}
       />
     </div>
   );
