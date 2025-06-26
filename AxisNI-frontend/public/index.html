@@ -45,20 +45,32 @@
     <!-- Apple Touch Icon -->
     <link rel="apple-touch-icon" href="/LogoEFWS.png" />
 
+    <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml">
+
     <!-- Optional: manifest for PWA -->
     <!-- <link rel="manifest" href="/manifest.json" /> -->
      <script type="application/ld+json">
       {
         "@context": "https://schema.org",
-        "@type": "WebSite",
-        "name": "Budget Northern Ireland (NI), charts and Top UK schools",
+        "@type": "Dataset",
+        "name": "Northern Ireland Budget Data 2010–2025",
+        "description": "Detailed budget spending data for NI over 15 years. Interactive charts and fiscal analysis.",
+        "creator": {
+          "@type": "Person",
+          "name": "Denis K"
+        },
         "url": "https://chartsgp-3.onrender.com",
-        "potentialAction": {
-          "@type": "SearchAction",
-          "target": "https://chartsgp-3.onrender.com/?q={search_term_string}",
-          "query-input": "required name=search_term_string"
-        }
+        "keywords": ["Northern Ireland", "Stormont", "public budget", "government spending", "fiscal charts"],
+        "license": "https://opendatacommons.org/licenses/by/"
       }
+      {
+        "@context": "https://schema.org",
+        "@type": "EducationalOrganization",
+        "name": "Top UK Schools by Rank and GCSE Results",
+        "url": "https://chartsgp-3.onrender.com/schools-map",
+        "description": "Interactive map and table of England's top secondary schools filtered by rank, type, and performance."
+      }
+
       </script>
 
 
