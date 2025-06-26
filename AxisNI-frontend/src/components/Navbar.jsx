@@ -72,7 +72,7 @@ const Navbar = () => {
       >
         The best schools in England
         <span style={{ display: "block", fontSize: "0.5em" }}>
-          (will update 27/06/2025)
+          (last update 27/06/2025, next update 03/07/2025)
         </span>
       </NavLink>
 
