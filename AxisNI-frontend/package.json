@@ -8,6 +8,7 @@
     "@emotion/styled": "^11.14.0",
     "@mui/material": "^7.1.1",
     "@react-google-maps/api": "^2.20.7",
+    "@tippyjs/react": "^4.2.6",
     "axios": "^1.10.0",
     "highcharts": "^12.2.0",
     "highcharts-react-official": "^3.2.2",
@@ -24,6 +25,7 @@
     "react-rnd": "^10.5.2",
     "react-router-dom": "^6.30.1",
     "react-scripts": "^5.0.1",
+    "tippy.js": "^6.3.7",
     "xlsx": "^0.18.5"
   },
   "scripts": {

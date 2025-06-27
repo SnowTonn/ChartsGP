@@ -2,6 +2,8 @@ import React, { useEffect, useRef, useState } from "react";
 import maplibregl from "maplibre-gl";
 import Papa from "papaparse";
 import "maplibre-gl/dist/maplibre-gl.css";
+import Tippy from '@tippyjs/react';
+import 'tippy.js/dist/tippy.css';
 
 // Define the base styles for different map styles
 const baseLayers = {
@@ -155,6 +157,7 @@ export default function SchoolsMap() {
           address: row["ADDRESS"] || null,
           city: row["TOWN"] || null,
           pupilsKS4: Number.isNaN(parseInt(row["TOTPUPS"], 10)) ? null : parseInt(row["TOTPUPS"], 10),
+          numboys: Number.isNaN(parseInt(row["NUMBOYS"], 10))  ? null : parseInt(row["NUMBOYS"], 10),
           numgirls: Number.isNaN(parseInt(row["NUMGIRLS"], 10))  ? null : parseInt(row["NUMGIRLS"], 10),
           grade5Plus: Number.isNaN(parseFloat(row["PTL2BASICS_94"])) ? 0 : parseFloat(row["PTL2BASICS_94"]),
           latitude: Number.isNaN(parseFloat(row["Latitude"])) ? null : parseFloat(row["Latitude"]),
@@ -209,9 +212,9 @@ export default function SchoolsMap() {
   const schoolsMissingCoords = filteredSchools.length - schoolsWithCoords.length;
 
   const getMarkerColor = (rank) => {
-    if (rank <= 100) return "#1a9850";
-    if (rank <= 300) return "#fee08b";
-    return "#d73027";
+    if (rank <= 100) return "#2a9d8f";
+    if (rank <= 200) return "#e9c46a";
+    return "#f4a261";
   };
 
   useEffect(() => {
@@ -248,9 +251,14 @@ export default function SchoolsMap() {
   return (
     <div style={{ background: "#f9f9fc", minHeight: "100vh", padding: "20px" }}>
       <div style={{ maxWidth: "1200px", margin: "auto" }}>
-        <h2 style={{ textAlign: "center", color: "#264653", marginBottom: "1rem" }}>
-          The UK Schools Map
-        </h2>
+        <Tippy content={<span style={{ color: COLORS.capital }}> Currently showing the top 300 schools from England. In the next release, I plan to include schools from Northern Ireland as well. </span>}
+          placement="right"
+          arrow={true}
+      >
+            <h2 style={{ textAlign: "center", color: "#264653", marginBottom: "1rem" }}>
+              The UK Schools Map
+            </h2>
+        </Tippy>
 
         <div style={{ textAlign: "center", marginBottom: "2rem", padding: "0 10px" }}>
           <p style={{ fontSize: 14, color: COLORS.total, marginBottom: 12 }}>
@@ -579,19 +587,39 @@ export default function SchoolsMap() {
             )}
             <p><strong>{schoolsWithCoords.length}</strong> schools shown on the map</p>
             <p>
-              <div style={{ display: 'inline' }}>
+              <>
                 <strong>
-                  {filteredSchools.reduce((total, s) => total + (s.pupilsKS4 || 0), 0)}
-                </strong>{" "}
-                pupils in displayed schools
-              </div>
-              <span style={{ margin: '0 20px' }}></span> {/* spacer */}
-              <div style={{ display: 'inline' }}>
+                  <Tippy content={<span style={{ color: COLORS.capital }}>Extends beyond secondary education</span>}>
+                    <span style={{ color: COLORS.total }}>
+                      {filteredSchools.reduce((total, s) => total + (s.pupilsKS4 || 0), 0)}
+                    </span>
+                  </Tippy>
+                </strong>{" "} pupils in displayed schools&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
                 <strong>
                   {filteredSchools.reduce((total, s) => total + (s.numgirls || 0), 0)}
-                </strong>{" "}
-                girls in displayed schools (May differ from total number of students due to Mixed 6 form)
-              </div>
+                </strong>{" "} girls in displayed schools&nbsp;
+
+                <Tippy content="Compared to the total number of pupils in 'girls' schools, this number may differ due to mixed sixth forms.">
+                  <span style={{ textDecoration: "underline dotted", cursor: "help" }}>(?)</span>
+                </Tippy>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                
+                
+                <strong> 
+                  {filteredSchools.reduce((total, s) => total + (s.numboys || 0), 0)}                   
+                </strong>{" "} 
+                boys in displayed schools&nbsp;
+
+
+                <Tippy content="Compared to the total number of pupils in 'boys' schools, this number may differ due to mixed sixth forms.">
+                  <span style={{ textDecoration: "underline dotted", cursor: "help" }}>(?)</span>
+                </Tippy>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                
+
+
+
+              </>
             </p>
           </div>
 
