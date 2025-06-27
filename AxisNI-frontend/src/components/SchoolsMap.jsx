@@ -68,13 +68,21 @@ export default function SchoolsMap() {
   const [pupilsMin, setPupilsMin] = useState(0);
   const [grade5Max, setGrade5Max] = useState(100);
   const [rankMin, setRankMin] = useState(1);
-  const [rankMax, setRankMax] = useState(200);
+  const [rankMax, setRankMax] = useState(300);
   const [uniqueCities, setUniqueCities] = useState([]);
   const [uniqueTypes, setUniqueTypes] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [showList, setShowList] = useState(true);
   const [showDescription, setShowDescription] = useState(true);
+  
+  const [filterAgeRange, setFilterAgeRange] = useState("All");
+  const [filterGender, setFilterGender] = useState("All");
+  const [filterCountry, setFilterCountry] = useState("All");
+  const [uniqueCountries, setUniqueCountries] = useState([]);
+  const [uniqueAgeRanges, setUniqueAgeRanges] = useState([]);
+  const [uniqueGenders, setUniqueGenders] = useState([]);
+
 
   // NEW: Track current map style
   const [mapStyle, setMapStyle] = useState("Satellite");
@@ -84,7 +92,6 @@ export default function SchoolsMap() {
     resource: "#e9c46a",
     capital: "#f4a261",
   };
-
   const inputStyle = {
     width: "100%",
     padding: "6px 8px",
@@ -92,11 +99,9 @@ export default function SchoolsMap() {
     borderRadius: "4px",
     fontSize: "14px",
   };
-
   // Initialize the map with the selected style
   useEffect(() => {
     if (map.current) return;
-
     // Initialize with a default style (e.g. Satellite)
     map.current = new maplibregl.Map({
       container: mapContainer.current,
@@ -104,11 +109,9 @@ export default function SchoolsMap() {
       center: [-1, 52.5],
       zoom: 6,
     });
-
     // Optional fullscreen handler
     map.current.on("click", (e) => {
       const clickedElement = e.originalEvent.target;
-
       // Only toggle fullscreen if background map is clicked
       const isMapCanvas = clickedElement.classList.contains("maplibregl-canvas");
 
@@ -123,7 +126,6 @@ export default function SchoolsMap() {
         }
       }
     });
-
     map.current.addControl(new maplibregl.NavigationControl(), "top-right"); 
     return () => {
       if (map.current?.markers) {
@@ -131,11 +133,10 @@ export default function SchoolsMap() {
         map.current.markers = [];
       }
       map.current?.remove();
+      map.current = null;
     };
-  }, []); // ✅ no dependency on mapStyle
-
-
-  // UPDATE map style when mapStyle state changes (live update)
+  }, []); 
+  // UPDATE map style (live update)
   useEffect(() => {
     if (!map.current) return;
     map.current.setStyle(baseLayers[mapStyle]);
@@ -149,24 +150,30 @@ export default function SchoolsMap() {
       skipEmptyLines: true,
       complete: (results) => {
         const data = results.data.map((row) => ({
-          rank: parseInt(row["Rank"], 10),
-          name: row["SCHNAME"],
-          address: row["ADDRESS"],
-          city: row["TOWN"],
-          pupilsKS4: parseInt(row["TOTPUPS"], 10),
-          grade5Plus: parseFloat(row["PTL2BASICS_94"]) || 0,
-          latitude: parseFloat(row["Latitude"]),
-          longitude: parseFloat(row["Longitude"]),
-          gender: row["EGENDER"],
-          ageRange: row["AGERANGE"],
-          progress8Score: row["P8PUP"],
-          progress8Description: row["P8_BANDING"],
-          NFTYPE: row["NFTYPE"],
+          rank: Number.isNaN(parseInt(row["Rank"], 10)) ? null : parseInt(row["Rank"], 10),
+          name: row["SCHNAME"] || null,
+          address: row["ADDRESS"] || null,
+          city: row["TOWN"] || null,
+          pupilsKS4: Number.isNaN(parseInt(row["TOTPUPS"], 10)) ? null : parseInt(row["TOTPUPS"], 10),
+          numgirls: Number.isNaN(parseInt(row["NUMGIRLS"], 10))  ? null : parseInt(row["NUMGIRLS"], 10),
+          grade5Plus: Number.isNaN(parseFloat(row["PTL2BASICS_94"])) ? 0 : parseFloat(row["PTL2BASICS_94"]),
+          latitude: Number.isNaN(parseFloat(row["Latitude"])) ? null : parseFloat(row["Latitude"]),
+          longitude: Number.isNaN(parseFloat(row["Longitude"])) ? null : parseFloat(row["Longitude"]),
+          gender: row["EGENDER"] || null,
+          ageRange: row["AGERANGE"] || null,
+          progress8Score: row["P8PUP"] || null,
+          progress8Description: row["P8_BANDING"] || null,
+          NFTYPE: row["NFTYPE"] || null,
+          country: row["Country"] || (row["ADDRESS"]?.split(",").pop()?.trim() || null),
         }));
-
+        
         setSchools(data);
-        setUniqueCities([...new Set(data.map((s) => s.city).filter(Boolean))]);
+        console.log([...new Set(data.map((s) => s.country))]); // show log
+        setUniqueCities([...new Set(data.map((s) => s.city).filter(Boolean))].sort());
         setUniqueTypes([...new Set(data.map((s) => s.NFTYPE).filter(Boolean))]);
+        setUniqueCountries([...new Set(data.map((s) => s.country).filter(Boolean))]);
+        setUniqueAgeRanges([...new Set(data.map((s) => s.ageRange).filter(Boolean))].sort());
+        setUniqueGenders([...new Set(data.map((s) => s.gender).filter(Boolean))]);
         setRankMax(Math.max(...data.map((s) => s.rank || 0)));
         setLoading(false);
       },
@@ -180,6 +187,10 @@ export default function SchoolsMap() {
   const filteredSchools = schools.filter((school) => {
     if (filterCity !== "All" && school.city !== filterCity) return false;
     if (filterType !== "All" && school.NFTYPE !== filterType) return false;
+    if (filterCountry !== "All" && school.country !== filterCountry) return false;
+
+    if (filterAgeRange !== "All" && school.ageRange !== filterAgeRange) return false;
+    if (filterGender !== "All" && school.gender !== filterGender) return false;
     if (
       searchName.trim() !== "" &&
       !school.name.toLowerCase().includes(searchName.toLowerCase())
@@ -217,7 +228,7 @@ export default function SchoolsMap() {
          <b>Rank:</b> ${school.rank}<br/>
          <b>Gender:</b> ${school.gender}<br/>
          <b>Age Range:</b> ${school.ageRange}<br/>
-         <b>City:</b> ${school.city}<br/>
+         <b>City/Town:</b> ${school.city}<br/>
          <b>Type:</b> ${school.NFTYPE}<br/>
          <b>Address:</b> ${school.address}<br/>
          <b>Pupils:</b> ${school.pupilsKS4}<br/>
@@ -232,17 +243,7 @@ export default function SchoolsMap() {
 
       map.current.markers.push(marker);
     });
-  }, [schoolsWithCoords]);
-
-  // function sanitizeRankInput(value, fallback, min, max) {
-  //   let val = value.toString().replace(/[^\d]/g, "");
-  //   if (val === "") return fallback;
-  //   let intVal = parseInt(val, 10);
-  //   if (isNaN(intVal)) intVal = fallback;
-  //   if (intVal < min) intVal = min;
-  //   if (intVal > max) intVal = max;
-  //   return intVal;
-  // }
+  }, [schoolsWithCoords]); 
 
   return (
     <div style={{ background: "#f9f9fc", minHeight: "100vh", padding: "20px" }}>
@@ -274,7 +275,7 @@ export default function SchoolsMap() {
           }}
         >
           <div>
-            <label>City:</label>
+            <label>City/Town:</label>
             <select
               style={inputStyle}
               value={filterCity}
@@ -369,28 +370,72 @@ export default function SchoolsMap() {
               <input
                 type="number"
                 min={rankMin}
-                max={200}
+                max={300}
                 value={rankMax}
                 onChange={(e) => setRankMax(Number(e.target.value))}
                 style={{ ...inputStyle, flex: 1 }}
               />
-            </div>
+            </div>  
           </div>
+          <div>
+              <label>Country:</label>
+              <select
+                style={inputStyle}
+                value={filterCountry}
+                onChange={(e) => setFilterCountry(e.target.value)}
+              >
+                <option value="All">All</option>
+                {uniqueCountries.map((c) => (
+                  <option key={c} value={c}>{c}</option>
+                ))}
+              </select>
+            </div>
+
+            <div>
+              <label>Age Range in:</label>
+              <select
+                style={inputStyle}
+                value={filterAgeRange}
+                onChange={(e) => setFilterAgeRange(e.target.value)}
+              >
+                <option value="All">All</option>
+                {uniqueAgeRanges.map((ar) => (
+                  <option key={ar} value={ar}>{ar}</option>
+                ))}
+              </select>
+            </div>
+
+            <div>
+              <label>Gender:</label>
+              <select
+                style={inputStyle}
+                value={filterGender}
+                onChange={(e) => setFilterGender(e.target.value)}
+              >
+                <option value="All">All</option>
+                {uniqueGenders.map((g) => (
+                  <option key={g} value={g}>{g}</option>
+                ))}
+              </select>
+            </div>
 
           {/* MAP STYLE SWITCHER DROPDOWN */}
-          <div>
-            <label>Map Style:</label>
-            <select
-              style={inputStyle}
-              value={mapStyle}
-              onChange={(e) => setMapStyle(e.target.value)}
-            >
-              <option value="Satellite">Satellite</option>
-              <option value="Terrain">Terrain</option>
-              <option value="Streets">Streets</option>
-            </select>
-          </div>
+          
         </div>
+        
+        <div>
+          <label>Map Style:</label>
+          <select
+            style={inputStyle}
+            value={mapStyle}
+            onChange={(e) => setMapStyle(e.target.value)}
+          >
+            <option value="Satellite">Satellite</option>
+            <option value="Terrain">Terrain</option>
+            <option value="Streets">Streets</option>
+          </select>
+        </div>
+
 
         <div
           style={{
@@ -466,7 +511,14 @@ export default function SchoolsMap() {
               Hide list of schools
             </button>
             <ul style={{ listStyleType: "none", paddingLeft: 0, margin: 0 }}>
-              {filteredSchools.map((school) => (
+              {filteredSchools
+              .sort((a, b) => {
+                if (a.city && b.city) return a.city.localeCompare(b.city);
+                if (a.city) return -1;
+                if (b.city) return 1;
+                return 0;
+              })
+              .map((school) => (
                 <li
                   key={school.rank}
                   style={{
@@ -483,7 +535,8 @@ export default function SchoolsMap() {
                     });
                   }}
                 >
-                  <strong>{school.rank}. {school.name}</strong> ({school.city})
+                  <strong>{school.rank}. {school.name}</strong><br />
+                  <span>{school.city}</span>
                 </li>
               ))}
             </ul>
@@ -526,10 +579,19 @@ export default function SchoolsMap() {
             )}
             <p><strong>{schoolsWithCoords.length}</strong> schools shown on the map</p>
             <p>
-              <strong>
-                {filteredSchools.reduce((total, s) => total + (s.pupilsKS4 || 0), 0)}
-              </strong>{" "}
-              pupils in displayed schools
+              <div style={{ display: 'inline' }}>
+                <strong>
+                  {filteredSchools.reduce((total, s) => total + (s.pupilsKS4 || 0), 0)}
+                </strong>{" "}
+                pupils in displayed schools
+              </div>
+              <span style={{ margin: '0 20px' }}></span> {/* spacer */}
+              <div style={{ display: 'inline' }}>
+                <strong>
+                  {filteredSchools.reduce((total, s) => total + (s.numgirls || 0), 0)}
+                </strong>{" "}
+                girls in displayed schools (May differ from total number of students due to Mixed 6 form)
+              </div>
             </p>
           </div>
 
