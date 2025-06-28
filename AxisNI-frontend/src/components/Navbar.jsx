@@ -1,5 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import Tippy from '@tippyjs/react';
+import 'tippy.js/dist/tippy.css';
 
 const Navbar = () => {
   const linkStyle = {
@@ -60,21 +62,31 @@ const Navbar = () => {
       </NavLink>
 
       <NavLink
-      
         to="/schools-map"
         style={({ isActive }) =>
           isActive ? { ...linkStyle, ...activeStyle } : linkStyle
         }
-        onMouseEnter={e => (e.currentTarget.style.backgroundColor = "#3a5a73")}
-        onMouseLeave={e =>
-          (e.currentTarget.style.backgroundColor = e.currentTarget.getAttribute("aria-current") === "page" ? "#2a9d8f" : "#264653")
+        onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#3a5a73")}
+        onMouseLeave={(e) =>
+          (e.currentTarget.style.backgroundColor =
+            e.currentTarget.getAttribute("aria-current") === "page"
+              ? "#2a9d8f"
+              : "#264653")
         }
       >
-        The best schools in England
-        <span style={{ display: "block", fontSize: "0.5em" }}>
-          (last update 27/06/2025, next update 03/07/2025)
-        </span>
+        <Tippy
+          content={
+            <span style={{ color: "#fff" }}>
+              (last update 27/06/2025, next update 05/07/2025)
+            </span>
+          }
+          placement="right"
+          arrow={true}
+        >
+          <span>The best schools in England</span>
+        </Tippy>
       </NavLink>
+
 
 
     </nav>

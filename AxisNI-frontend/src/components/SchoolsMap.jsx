@@ -258,8 +258,11 @@ export default function SchoolsMap() {
             <h2 style={{ textAlign: "center", color: "#264653", marginBottom: "1rem" }}>
               The UK Schools Map
             </h2>
+            
         </Tippy>
-
+            <h1 style={{ textAlign: "center", color: "#264653", marginBottom: "1rem", fontSize: "1rem" }}>
+               Top Schools in England by GCSE Performance
+            </h1>
         <div style={{ textAlign: "center", marginBottom: "2rem", padding: "0 10px" }}>
           <p style={{ fontSize: 14, color: COLORS.total, marginBottom: 12 }}>
             Data sourced from&nbsp;
@@ -510,7 +513,7 @@ export default function SchoolsMap() {
               style={{
                 background: "none",
                 border: "none",
-                fontSize: "14px",
+                fontSize: "19px",
                 color: COLORS.resource,
                 cursor: "pointer",
                 marginBottom: "0.5rem",
@@ -532,7 +535,7 @@ export default function SchoolsMap() {
                   style={{
                     borderBottom: "1px solid #ddd",
                     padding: "0.5rem 0",
-                    fontSize: "14px",
+                    fontSize: "19px",
                     cursor: "pointer",
                   }}
                   onClick={() => {
@@ -556,7 +559,7 @@ export default function SchoolsMap() {
             style={{
               background: "none",
               border: "none",
-              fontSize: "14px",
+              fontSize: "19px",
               color: COLORS.resource,
               cursor: "pointer",
               marginTop: "0.5rem",
@@ -580,7 +583,7 @@ export default function SchoolsMap() {
             </p>
           </div>
         )} */}
-      <div style={{ marginBottom: "1rem", fontSize: "14px", color: "#333" }}>
+      <div style={{ marginBottom: "1rem", fontSize: "19px", color: "#333" }}>
             <p><strong>{filteredSchools.length}</strong> schools match filters</p>
             {schoolsMissingCoords > 0 && (
               <p><strong>{schoolsMissingCoords}</strong> missing coordinates</p>
@@ -640,8 +643,8 @@ export default function SchoolsMap() {
               style={{
                 background: "none",
                 border: "none",
-                fontSize: "14px",
-                color: COLORS.total,
+                fontSize: "19px",
+                color: "#264653",
                 cursor: "pointer",
                 marginBottom: "0.5rem",
               }}
@@ -649,7 +652,7 @@ export default function SchoolsMap() {
               Hide description
             </button>
             <div style={{ margin: "0 auto" }}>
-              <p style={{ textAlign: "center", fontSize: 14, color: COLORS.total, lineHeight: "1.6" }}>
+              <p style={{ textAlign: "center", fontSize: 19, color: "#264653", lineHeight: "1.6" }}>
                 Most parents think carefully about their children's education — how to give them the best possible opportunities.
                 This service helps simplify that task a little by clearly showing the situation with local schools,
                 whether around your current location or in an area you're considering moving to.
@@ -669,8 +672,8 @@ This score is based on how well pupils in a school have performed in up to 8 qua
             style={{
               background: "none",
               border: "none",
-              fontSize: "14px",
-              color: COLORS.total,
+              fontSize: "19px",
+              color: "#264653",
               cursor: "pointer",
               marginTop: "0.5rem",
             }}
