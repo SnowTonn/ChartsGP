@@ -86,7 +86,7 @@ export default function SchoolsMap() {
   const [uniqueGenders, setUniqueGenders] = useState([]);
 
   const [sortColumn, setSortColumn] = useState("rank"); // default sorting by rank!!!
-  const [sortDirection, setSortDirection] = useState("asc"); // ascending or descending!!!
+  const [sortDirection, setSortDirection] = useState("desc"); // ascending or descending!!!
   const [selectedFile, setSelectedFile] = useState("/data/top700schools.csv"); //Select file
  
   useEffect(() => { // Automatically set default sortColumn based on selected file
@@ -424,8 +424,9 @@ export default function SchoolsMap() {
               value={sortDirection}
               onChange={(e) => setSortDirection(e.target.value)}
             >
-              <option value="asc">... to best</option>
               <option value="desc">Best to ...</option>
+              <option value="asc">... to best</option>
+              
             </select>
           </div>
 
