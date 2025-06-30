@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/static/css/main.8cf7f3b2.css",
-    "main.js": "/static/js/main.d7646354.js",
+    "main.js": "/static/js/main.ce533a17.js",
     "static/media/LogoEF.png": "/static/media/LogoEF.47fc5e01a85552e69ae0.png",
     "index.html": "/index.html",
     "main.8cf7f3b2.css.map": "/static/css/main.8cf7f3b2.css.map",
-    "main.d7646354.js.map": "/static/js/main.d7646354.js.map"
+    "main.ce533a17.js.map": "/static/js/main.ce533a17.js.map"
   },
   "entrypoints": [
     "static/css/main.8cf7f3b2.css",
-    "static/js/main.d7646354.js"
+    "static/js/main.ce533a17.js"
   ]
 }

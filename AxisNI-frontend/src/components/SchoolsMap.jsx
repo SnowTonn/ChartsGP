@@ -4,6 +4,7 @@ import Papa from "papaparse";
 import "maplibre-gl/dist/maplibre-gl.css";
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
+import { Helmet } from "react-helmet";
 
 // Define the base styles for different map styles
 const baseLayers = {
@@ -339,6 +340,7 @@ export default function SchoolsMap() {
   }, [schoolsWithCoords]); 
 
   return (
+    
     <div style={{ background: "#f9f9fc", minHeight: "100vh", padding: "20px" }}>
       <div style={{ maxWidth: "1200px", margin: "auto" }}>
         <Tippy content={<span style={{ color: COLORS.capital }}> Currently showing the top 300 (by "Attainment 8") schools from England or 367 schools from England and Northern Ireland (by "Attainment 8" and "Grade 5+ %" (GCSE result). In the next release, I plan to include schools from Walse as well. </span>}
@@ -763,7 +765,48 @@ export default function SchoolsMap() {
 
                 <Tippy content="Compared to the total number of pupils in 'boys' schools, this number may differ due to mixed sixth forms.">
                   <span style={{ textDecoration: "underline dotted", cursor: "help" }}>(?)</span>
-                </Tippy>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   
+                </Tippy>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+
+
+                <Helmet>
+                  <title>Top UK Schools Map | Interactive GCSE Performance & Rankings</title>
+                  <link rel="canonical" href="https://chartsgp-3.onrender.com/schools-map" />
+                  <meta name="description" content="Explore the top UK secondary schools based on GCSE results. Interactive map and detailed school rankings filtered by rank, type, and performance." />
+                  <meta name="keywords" content="UK schools, GCSE results, school rankings, UK education, secondary schools, school map, data visualization, top schools UK" />
+                  <meta name="author" content="Denis K" />
+                  <meta name="robots" content="index, follow" />
+                  <meta property="og:title" content="Top UK Schools Map | Interactive GCSE Performance & Rankings" />
+                  <meta property="og:description" content="Explore the top UK secondary schools based on GCSE results with our interactive map and rankings." />
+                  <meta property="og:url" content="https://chartsgp-3.onrender.com/schools-map" />
+                  <meta property="og:type" content="website" />
+                  <meta property="og:image" content="https://chartsgp-3.onrender.com/og-image-schools-map.jpg" />
+                  <meta name="twitter:card" content="summary_large_image" />
+                  <meta name="twitter:title" content="Top UK Schools Map | Interactive GCSE Performance & Rankings" />
+                  <meta name="twitter:description" content="Explore the top UK secondary schools based on GCSE results with our interactive map and rankings." />
+                  <meta name="twitter:image" content="https://chartsgp-3.onrender.com/og-image-schools-map.jpg" />
+                  <script type="application/ld+json">
+                    {`
+                      {
+                        "@context": "https://schema.org",
+                        "@type": "Dataset",
+                        "name": "Top UK Schools GCSE Performance Data",
+                        "description": "Interactive dataset showing GCSE results and school rankings across UK secondary schools.",
+                        "url": "https://chartsgp-3.onrender.com/schools-map",
+                        "creator": {
+                          "@type": "Person",
+                          "name": "Denis K"
+                        }
+                      }
+                    `}
+                  </script>
+                </Helmet>
+
+                {/* The rest of your SchoolsMap JSX here */}
+
+
+
+
+
               </>
             </p>
           </div>
@@ -827,5 +870,8 @@ export default function SchoolsMap() {
         )}    
       </div>                  
     </div>
+    
+        
+
   );
 }
