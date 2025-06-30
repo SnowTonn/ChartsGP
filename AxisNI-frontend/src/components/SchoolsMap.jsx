@@ -70,7 +70,7 @@ export default function SchoolsMap() {
   const [pupilsMin, setPupilsMin] = useState(0);
   const [grade5Max, setGrade5Max] = useState(100);
   const [rankMin, setRankMin] = useState(1);
-  const [rankMax, setRankMax] = useState(300);
+  const [rankMax, setRankMax] = useState(367);
   const [uniqueCities, setUniqueCities] = useState([]);
   const [uniqueTypes, setUniqueTypes] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -84,6 +84,18 @@ export default function SchoolsMap() {
   const [uniqueCountries, setUniqueCountries] = useState([]);
   const [uniqueAgeRanges, setUniqueAgeRanges] = useState([]);
   const [uniqueGenders, setUniqueGenders] = useState([]);
+
+  const [sortColumn, setSortColumn] = useState("rank"); // default sorting by rank!!!
+  const [sortDirection, setSortDirection] = useState("asc"); // ascending or descending!!!
+  const [selectedFile, setSelectedFile] = useState("/data/top700schools.csv"); //Select file
+ 
+  useEffect(() => { // Automatically set default sortColumn based on selected file
+    if (selectedFile === "/data/top700schools.csv") {
+      setSortColumn("attainment8");
+    } else {
+      setSortColumn("grade5Plus");
+    }
+  }, [selectedFile]);
 
 
   // NEW: Track current map style
@@ -146,7 +158,8 @@ export default function SchoolsMap() {
 
   useEffect(() => {
     setLoading(true);
-    Papa.parse("/data/top700schools.csv", {
+    //Papa.parse("/data/top700schools.csv", {
+    Papa.parse(selectedFile, {
       download: true,
       header: true,
       skipEmptyLines: true,
@@ -160,6 +173,7 @@ export default function SchoolsMap() {
           numboys: Number.isNaN(parseInt(row["NUMBOYS"], 10))  ? null : parseInt(row["NUMBOYS"], 10),
           numgirls: Number.isNaN(parseInt(row["NUMGIRLS"], 10))  ? null : parseInt(row["NUMGIRLS"], 10),
           grade5Plus: Number.isNaN(parseFloat(row["PTL2BASICS_94"])) ? 0 : parseFloat(row["PTL2BASICS_94"]),
+          attainment8: Number.isNaN(parseFloat(row["ATT8SCR"])) ? 0 : parseFloat(row["ATT8SCR"]),
           latitude: Number.isNaN(parseFloat(row["Latitude"])) ? null : parseFloat(row["Latitude"]),
           longitude: Number.isNaN(parseFloat(row["Longitude"])) ? null : parseFloat(row["Longitude"]),
           gender: row["EGENDER"] || null,
@@ -185,9 +199,38 @@ export default function SchoolsMap() {
         setLoading(false);
       },
     });
-  }, []);
+  }, [selectedFile]);
 
-  const filteredSchools = schools.filter((school) => {
+  const handleFileChange = (e) => {
+    const value = e.target.value;
+    setSelectedFile(value);
+  };
+
+
+
+
+  const sortedAllSchools = [...schools].sort((a, b) => {
+    const aValue = a[sortColumn];
+    const bValue = b[sortColumn];
+
+    if (aValue === null || aValue === undefined) return 1;
+    if (bValue === null || bValue === undefined) return -1;
+
+    if (typeof aValue === 'string') {
+      return sortDirection === 'asc'
+        ? aValue.localeCompare(bValue)
+        : bValue.localeCompare(aValue);
+    } else {
+      return sortDirection === 'asc' ? aValue - bValue : bValue - aValue;
+    }
+  });
+
+  const rankedAllSchools = sortedAllSchools.map((school, index) => ({
+    ...school,
+    rank: index + 1,
+  }));
+
+  const filteredSchools = rankedAllSchools.filter((school) => {
     if (filterCity !== "All" && school.city !== filterCity) return false;
     if (filterType !== "All" && school.NFTYPE !== filterType) return false;
     if (filterCountry !== "All" && school.country !== filterCountry) return false;
@@ -205,10 +248,58 @@ export default function SchoolsMap() {
     return true;
   });
 
+  
+
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  // const filteredSchoolsA = schools.filter((school) => {
+  //   if (filterCity !== "All" && school.city !== filterCity) return false;
+  //   if (filterType !== "All" && school.NFTYPE !== filterType) return false;
+  //   if (filterCountry !== "All" && school.country !== filterCountry) return false;
+
+  //   if (filterAgeRange !== "All" && school.ageRange !== filterAgeRange) return false;
+  //   if (filterGender !== "All" && school.gender !== filterGender) return false;
+  //   if (
+  //     searchName.trim() !== "" &&
+  //     !school.name.toLowerCase().includes(searchName.toLowerCase())
+  //   )
+  //     return false;
+  //   if (school.pupilsKS4 > pupilsMax || school.pupilsKS4 < pupilsMin) return false;
+  //   if (school.grade5Plus > grade5Max) return false;
+  //   if (school.rank < rankMin || school.rank > rankMax) return false;
+  //   return true;
+  // });
+  
+
+
+  // const sortedSchools = [...filteredSchoolsA].sort((a, b) => {
+  //   const aValue = a[sortColumn];
+  //   const bValue = b[sortColumn];
+
+  //   if (aValue === null || aValue === undefined) return 1;
+  //   if (bValue === null || bValue === undefined) return -1;
+
+  //   if (typeof aValue === 'string') {
+  //     return sortDirection === 'asc'
+  //       ? aValue.localeCompare(bValue)
+  //       : bValue.localeCompare(aValue);
+  //   } else {
+  //     return sortDirection === 'asc' ? aValue - bValue : bValue - aValue;
+  //   }
+  // });
+
+  // const rankedSchools = sortedSchools.map((school, index) => ({
+  //   ...school,
+  //   rank1: index + 1,
+  // }));
+//!!!!!!!!!!!!!!!!!!!!!!!!!
 
   const schoolsWithCoords = filteredSchools.filter(
     (s) => !isNaN(s.latitude) && !isNaN(s.longitude)
   );
+  
+  //const numberOfSortedSchools = sortedSchools.length;
+
+
   const schoolsMissingCoords = filteredSchools.length - schoolsWithCoords.length;
 
   const getMarkerColor = (rank) => {
@@ -216,7 +307,6 @@ export default function SchoolsMap() {
     if (rank <= 200) return "#e9c46a";
     return "#f4a261";
   };
-
   useEffect(() => {
     if (!map.current) return;
 
@@ -228,7 +318,7 @@ export default function SchoolsMap() {
     schoolsWithCoords.forEach((school) => {
       const popup = new maplibregl.Popup({ offset: 25 }).setHTML(
         `<strong>${school.name}</strong><br/>
-         <b>Rank:</b> ${school.rank}<br/>
+         <b>Rank according metric:</b> ${school.rank}<br/>
          <b>Gender:</b> ${school.gender}<br/>
          <b>Age Range:</b> ${school.ageRange}<br/>
          <b>City/Town:</b> ${school.city}<br/>
@@ -251,7 +341,7 @@ export default function SchoolsMap() {
   return (
     <div style={{ background: "#f9f9fc", minHeight: "100vh", padding: "20px" }}>
       <div style={{ maxWidth: "1200px", margin: "auto" }}>
-        <Tippy content={<span style={{ color: COLORS.capital }}> Currently showing the top 300 schools from England. In the next release, I plan to include schools from Northern Ireland as well. </span>}
+        <Tippy content={<span style={{ color: COLORS.capital }}> Currently showing the top 300 (by "Attainment 8") schools from England or 367 schools from England and Northern Ireland (by "Attainment 8" and "Grade 5+ %" (GCSE result). In the next release, I plan to include schools from Walse as well. </span>}
           placement="right"
           arrow={true}
       >
@@ -261,7 +351,7 @@ export default function SchoolsMap() {
             
         </Tippy>
             <h1 style={{ textAlign: "center", color: "#264653", marginBottom: "1rem", fontSize: "1rem" }}>
-               Top Schools in England by GCSE Performance
+               Top Schools in England (and Nothern Ireland) by GCSE Performance 2024
             </h1>
         <div style={{ textAlign: "center", marginBottom: "2rem", padding: "0 10px" }}>
           <p style={{ fontSize: 14, color: COLORS.total, marginBottom: 12 }}>
@@ -277,6 +367,21 @@ export default function SchoolsMap() {
           </p>
         </div>
 
+        {/* UI */}
+
+        <div>
+          <h3>Choose School Dataset</h3>
+          <select value={selectedFile} onChange={handleFileChange}>
+            <option value="/data/top700schools.csv">England Only</option>
+            <option value="/data/top369schoolsNIandEng.csv">England + Northern Ireland (MVP)</option>
+          </select>
+
+          {loading && <p>Loading schools...</p>}
+          {error && <p style={{ color: "red" }}>{error}</p>}
+
+          <p><strong>Total schools loaded:</strong> {schools.length}</p>
+        </div>
+        
         <div
           style={{
             display: "grid",
@@ -285,6 +390,49 @@ export default function SchoolsMap() {
             marginBottom: "1.5rem",
           }}
         >
+          
+          
+
+
+
+          <div>
+            <label>Sort By:</label>
+            <select
+              style={inputStyle}
+              value={sortColumn}
+              onChange={(e) => setSortColumn(e.target.value)}
+            >
+              {selectedFile === "/data/top700schools.csv" ? (
+                <>
+                  <option value="attainment8">Attainment 8</option>
+                </>
+              ) : (
+                <>
+                  <option value="grade5Plus">Grade 5+ %</option>
+                  
+                </>
+              )}
+
+
+              {/* Optional shared sort options */}
+              {/* <option value="name">Name</option>
+              <option value="city">City/Town</option> */}
+            </select>
+
+            <select
+              style={{ ...inputStyle, width: "auto", marginLeft: "8px" }}
+              value={sortDirection}
+              onChange={(e) => setSortDirection(e.target.value)}
+            >
+              <option value="asc">... to best</option>
+              <option value="desc">Best to ...</option>
+            </select>
+          </div>
+
+
+          
+          
+          
           <div>
             <label>City/Town:</label>
             <select
@@ -354,12 +502,12 @@ export default function SchoolsMap() {
 
 
           <div>
-            <label>Grade 5+ % max:</label>
+            <label>Grade 5+ %:</label>
             <input
               type="range"
-              min={0}
+              min={70}
               max={100}
-              step={1}
+              step={0.1}
               value={grade5Max}
               onChange={(e) => setGrade5Max(Number(e.target.value))}
               style={{ width: "100%" }}
@@ -381,7 +529,7 @@ export default function SchoolsMap() {
               <input
                 type="number"
                 min={rankMin}
-                max={300}
+                max={367}
                 value={rankMax}
                 onChange={(e) => setRankMax(Number(e.target.value))}
                 style={{ ...inputStyle, flex: 1 }}
@@ -524,11 +672,24 @@ export default function SchoolsMap() {
             <ul style={{ listStyleType: "none", paddingLeft: 0, margin: 0 }}>
               {filteredSchools
               .sort((a, b) => {
-                if (a.city && b.city) return a.city.localeCompare(b.city);
-                if (a.city) return -1;
-                if (b.city) return 1;
-                return 0;
+                let valA = a[sortColumn];
+                let valB = b[sortColumn];
+
+                // Handle null or undefined
+                if (valA == null) return 1;
+                if (valB == null) return -1;
+
+                // If the column is string, use localeCompare
+                if (typeof valA === "string" && typeof valB === "string") {
+                  return sortDirection === "asc"
+                    ? valA.localeCompare(valB)
+                    : valB.localeCompare(valA);
+                }
+
+                // Otherwise, assume number
+                return sortDirection === "asc" ? valA - valB : valB - valA;
               })
+
               .map((school) => (
                 <li
                   key={school.rank}
@@ -567,22 +728,7 @@ export default function SchoolsMap() {
           >
             Show list of schools
           </button>
-        )}
-        {/* {schoolsMissingCoords > 0 && (
-          <div style={{ marginBottom: "1rem", fontSize: "14px", color: "#333" }}>
-            <p><strong>{filteredSchools.length}</strong> schools match filters</p>
-            {schoolsMissingCoords > 0 && (
-              <p><strong>{schoolsMissingCoords}</strong> missing coordinates</p>
-            )}
-            <p><strong>{schoolsWithCoords.length}</strong> schools shown on the map</p>
-            <p>
-              <strong>
-                {filteredSchools.reduce((total, s) => total + (s.pupilsKS4 || 0), 0)}
-              </strong>{" "}
-              pupils in displayed schools
-            </p>
-          </div>
-        )} */}
+        )}   
       <div style={{ marginBottom: "1rem", fontSize: "19px", color: "#333" }}>
             <p><strong>{filteredSchools.length}</strong> schools match filters</p>
             {schoolsMissingCoords > 0 && (
@@ -616,16 +762,10 @@ export default function SchoolsMap() {
 
                 <Tippy content="Compared to the total number of pupils in 'boys' schools, this number may differ due to mixed sixth forms.">
                   <span style={{ textDecoration: "underline dotted", cursor: "help" }}>(?)</span>
-                </Tippy>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-
-                
-
-
-
+                </Tippy>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   
               </>
             </p>
           </div>
-
 
       {showDescription && (
           <div
@@ -661,7 +801,10 @@ export default function SchoolsMap() {
                 our children are currently receiving — and what other options might be available.
                 <br /><br />
                 Rank according with "Attainment 8"
-This score is based on how well pupils in a school have performed in up to 8 qualifications, which include English, maths, 3 English Baccalaureateopens in a new window qualifications including sciences, computer science, history, geography and languages, and 3 other additional approved qualificationsopens in a new window.
+                This score is based on how well pupils in a school have performed in up to 8 qualifications, which include English, maths, 3 English Baccalaureateopens in a new window qualifications including sciences, computer science, history, geography and languages, and 3 other additional approved qualificationsopens in a new window.
+                <br /><br />
+                Grade 5 or above in English & maths GCSEs - "Grade 5+ %:"
+                This tells you the percentage of pupils who achieved grade 5 or above in English and maths GCSEsopens in a new window. Reformed GCSEs are graded 1 (low) to 9 (high). Grade 5 is a similar level of achievement to a high grade C or low grade B in the old grading.
               </p>
             </div>
           </div>
@@ -680,17 +823,8 @@ This score is based on how well pupils in a school have performed in up to 8 qua
           >
             Show description
           </button>
-        )}
-      
-        
-
-
-      </div>
-       
-       
-       
-       
-       
+        )}    
+      </div>                  
     </div>
   );
 }
