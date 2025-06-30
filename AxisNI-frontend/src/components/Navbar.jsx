@@ -83,7 +83,7 @@ const Navbar = () => {
           placement="right"
           arrow={true}
         >
-          <span><title>Best UK Schools 2025</title></span>
+          <span>Best UK schools</span>
         </Tippy>
       </NavLink>
 
