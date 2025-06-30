@@ -77,13 +77,13 @@ const Navbar = () => {
         <Tippy
           content={
             <span style={{ color: "#fff" }}>
-              (last update 27/06/2025, next update 05/07/2025)
+              (last update 30/06/2025, next update 30/07/2025)
             </span>
           }
           placement="right"
           arrow={true}
         >
-          <span>The best schools in England</span>
+          <span><title>Best UK Schools 2025</title></span>
         </Tippy>
       </NavLink>
 

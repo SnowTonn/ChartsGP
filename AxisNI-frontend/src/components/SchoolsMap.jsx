@@ -348,12 +348,12 @@ export default function SchoolsMap() {
           arrow={true}
       >
             <h2 style={{ textAlign: "center", color: "#264653", marginBottom: "1rem" }}>
-              The UK Schools Map
+              Best UK schools 2025
             </h2>
             
         </Tippy>
             <h1 style={{ textAlign: "center", color: "#264653", marginBottom: "1rem", fontSize: "1rem" }}>
-               Top Schools in England (and Nothern Ireland) by GCSE Performance 2024
+               Top Schools in England (and Nothern Ireland) by GCSE Performance 
             </h1>
         <div style={{ textAlign: "center", marginBottom: "2rem", padding: "0 10px" }}>
           <p style={{ fontSize: 14, color: COLORS.total, marginBottom: 12 }}>
@@ -769,21 +769,25 @@ export default function SchoolsMap() {
 
 
                 <Helmet>
-                  <title>Top UK Schools Map | Interactive GCSE Performance & Rankings</title>
+                  <title>Top UK Schools 2025 | GCSE Rankings & Interactive Map</title>
                   <link rel="canonical" href="https://chartsgp-3.onrender.com/schools-map" />
-                  <meta name="description" content="Explore the top UK (England and Northern Iralend) secondary schools based on GCSE results. Interactive map and detailed school rankings filtered by rank, type, and performance." />
-                  <meta name="keywords" content="UK schools, GCSE results, school rankings, UK education, secondary schools, school map, data visualization, top schools UK" />
+                  <meta name="description" content="Explore the top UK (England and Northern Ireland) secondary schools based on GCSE results. Interactive map and detailed school rankings filtered by rank, type, and performance." />
                   <meta name="author" content="Denis K" />
                   <meta name="robots" content="index, follow" />
-                  <meta property="og:title" content="Top UK Schools Map | Interactive GCSE Performance & Rankings" />
+                  
+                  <meta property="og:title" content="Top UK Schools 2025 | GCSE Rankings & Interactive Map" />
                   <meta property="og:description" content="Explore the top UK secondary schools based on GCSE results with our interactive map and rankings." />
                   <meta property="og:url" content="https://chartsgp-3.onrender.com/schools-map" />
                   <meta property="og:type" content="website" />
                   <meta property="og:image" content="https://chartsgp-3.onrender.com/og-image-schools-map.jpg" />
+                  <meta property="og:image:width" content="1200" />
+                  <meta property="og:image:height" content="630" />
+                  
                   <meta name="twitter:card" content="summary_large_image" />
-                  <meta name="twitter:title" content="Top UK Schools Map | Interactive GCSE Performance & Rankings" />
+                  <meta name="twitter:title" content="Top UK Schools 2025 | GCSE Rankings & Interactive Map" />
                   <meta name="twitter:description" content="Explore the top UK secondary schools based on GCSE results with our interactive map and rankings." />
                   <meta name="twitter:image" content="https://chartsgp-3.onrender.com/og-image-schools-map.jpg" />
+
                   <script type="application/ld+json">
                     {`
                       {
@@ -792,6 +796,7 @@ export default function SchoolsMap() {
                         "name": "Top UK Schools GCSE Performance Data",
                         "description": "Interactive dataset showing GCSE results and school rankings across UK secondary schools.",
                         "url": "https://chartsgp-3.onrender.com/schools-map",
+                        "datePublished": "2025-06-30",
                         "creator": {
                           "@type": "Person",
                           "name": "Denis K"
