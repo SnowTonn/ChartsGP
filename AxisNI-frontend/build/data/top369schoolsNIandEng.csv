@@ -299,11 +299,11 @@ Rank,SCHNAME,ADDRESS,TOWN,PCON_NAME,NFTYPE,RELDENOM,EGENDER,AGERANGE,TOTPUPS,NUM
 298,Thornden School,"Winchester Road, SO53 2DW",Eastleigh,Eastleigh,ACC,Does not apply,MIXED,11-16,1456,766,690,290,108,61.4,279,88.60%,5.76,63.40%,Well above average,50.9944946,-1.3630079,England,Secondary
 299,Ark Bolingbroke Academy,"Wakehurst Road, SW11 6BF",London,Battersea,F,None,MIXED,11-18,770,437,333,115,106.2,61.3,112,88.70%,5.77,61.70%,Well above average,51.45631922,-0.168508595,England,Secondary
 300,Alexandra Park School,"Bidwell Gardens, N11 2AZ",London,Hornsey and Friern Barnet,ACC,Does not apply,MIXED,11-18,1850,902,948,224,107.3,61.3,220,86.20%,5.57,49.60%,Well above average,51.602153,-0.1365257,England,Secondary
-,St Dominic's High School,"135–137 Falls Road, Belfast, BT12 6AE",Belfast ,Belfast West ,ACC,Roman Catholic,GIRLS,11-18,,,,,,,,100.00%,,,,54.59458402,-5.958505252,NI,Secondary
-,Aquinas Diocesan Grammar School,"518 Ravenhill Road, Belfast, BT6?0BY",Belfast ,Belfast South,ACC,Roman Catholic,BOYS,,,,,,,,,100.00%,,,,54.575981,-5.9075017,NI,Secondary
+,St Dominic's High School,"135–137 Falls Road, Belfast, BT12 6AE",Belfast,Belfast West ,ACC,Roman Catholic,GIRLS,11-18,,,,,,,,100.00%,,,,54.59458402,-5.958505252,NI,Secondary
+,Aquinas Diocesan Grammar School,"518 Ravenhill Road, Belfast, BT6?0BY",Belfast,Belfast South,ACC,Roman Catholic,MIXED,,,,,,,,,100.00%,,,,54.575981,-5.9075017,NI,Secondary
 ,St Mary's Grammar School,"131 York Rd, Magherafelt, BT45 6ED",Magherafelt,Mid Ulster,ACC,Roman Catholic,GIRLS,,,,,,,,,100.00%,,,,54.7575871,-6.6020986,NI,Secondary
 ,Friends' School,"12 College Gardens, Lisburn, BT28 3AB",Lisburn,Lagan Valley,ACC,Methodist,MIXED,,,,,,,,,100.00%,,,,54.51742721,-6.044383877,NI,Secondary
-,Our Lady and St Patrick's College,"216 Falls Rd, Belfast, BT12 6AY",Belfast,Belfast West,ACC,Roman Catholic,BOYS,,,,,,,,,100.00%,,,,54.585171,-5.843617,NI,Secondary
+,Our Lady and St Patrick's College,"216 Falls Rd, Belfast, BT12 6AY",Belfast,Belfast West,ACC,Roman Catholic,MIXED,,,,,,,,,100.00%,,,,54.585171,-5.843617,NI,Secondary
 ,Rainey Endowed School,"79 Rainey Street, Magherafelt, Co Londonderry, BT45 5DB",Magherafelt,Mid Ulster ,ACC,Presbyterian,MIXED,,,,,,,,,100.00%,,,,54.7568312,-6.6131303,NI,Secondary
 ,Mount Lourdes Grammar School,"4 Belmore Street, Enniskillen, Co Fermanagh, BT74 6AB",Enniskillen,Fermanagh & South Tyrone,ACC,Roman Catholic,GIRLS,,,,,,,,,100.00%,,,,54.345588,-7.6357099,NI,Secondary
 ,Ballymena Academy,"89 Galgorm Road, Ballymena, Co Antrim, BT42 1AJ",Ballymena,Ballymena Town,ACC,Protestant,MIXED,,,,,,,,,100.00%,,,,54.8647977,-6.2937379,NI,Secondary
@@ -328,7 +328,7 @@ Rank,SCHNAME,ADDRESS,TOWN,PCON_NAME,NFTYPE,RELDENOM,EGENDER,AGERANGE,TOTPUPS,NUM
 ,Sacred Heart Grammar School,"10 Ashgrove Avenue, Newry, Co Down, BT34 1PR",Newry,Newry & Armagh,ACC,Roman Catholic,GIRLS,11-18,,,,,,,,97.60%,,,,54.1888185,-6.3283972,NI,Secondary
 ,Strathearn School,"Strathearn Park, Belfast, BT9 5JN",Belfast,Belfast South,ACC,Protestant,GIRLS,,,,,,,,,97.50%,,,,54.6016175,-5.8605891,NI,Secondary
 ,Ballymena Academy,"89 Galgorm Road, Ballymena, BT42 1AJ",Ballymena,North Antrim,ACC,Protestant,MIXED,,,,,,,,,97.20%,,,,54.8647977,-6.2937379,NI,Secondary
-,Bangor Grammar School,"Castle Park, Bangor, Co Down, BT20 3AE",Bangor,North Down,ACC,Protestant,MIXED,,,,,,,,,97.10%,,,,54.6432674,-5.6478669,NI,Secondary
+,Bangor Grammar School,"Castle Park, Bangor, Co Down, BT20 3AE",Bangor,North Down,ACC,Protestant,BOYS,11-18,,,,,,,,97.10%,,,,54.6432674,-5.6478669,NI,Secondary
 ,Grosvenor Grammar School,"Ashgrove Avenue, Belfast, BT4 2NB",Belfast,Belfast East,ACC,Protestant,MIXED,,,,,,,,,97.00%,,,,54.5832432,-5.8765835,NI,Secondary
 ,Foyle College,"6 Limavady Road, Londonderry, BT47 6TG",Londonderry,Foyle,ACC,Protestant,MIXED,,,,,,,,,97.00%,,,,55.0032108,-7.2934772,NI,Secondary
 ,Omagh Academy,"61 High Street, Omagh, Co Tyrone, BT78 1DX",Omagh,West Tyrone,ACC,Protestant,MIXED,,,,,,,,,97.00%,,,,54.5978837,-7.2985417,NI,Secondary
@@ -349,7 +349,7 @@ Rank,SCHNAME,ADDRESS,TOWN,PCON_NAME,NFTYPE,RELDENOM,EGENDER,AGERANGE,TOTPUPS,NUM
 ,Thornhill College,"121 Culcavy Rd, Dromore, BT25 1LY",Dromore,Lagan Valley,ACC,Roman Catholic,GIRLS,,,,,,,,,94.70%,,,,55.0379137,-7.2822755,NI,Secondary
 ,The Royal School Armagh,"57 College Hill, Armagh, BT61 7DW",Armagh,Newry & Armagh,ACC,Protestant,MIXED,,,,,,,,,94.30%,,,,54.3510272,-6.6484251,NI,Secondary
 ,Assumption Grammar School,"20 Glen Rd, Ballynahinch, BT24 8BN",Ballynahinch,Strangford,ACC,Roman Catholic,GIRLS,,,,,,,,,94.20%,,,,54.4056869,-5.8965265,NI,Secondary
-,The Royal Belfast Academical Institution,"College Square East, Belfast, BT1 6DL",Belfast,Belfast East,ACC,Protestant,MIXED,,,,,,,,,94.00%,,,,54.5970353,-5.9368872,NI,Secondary
+,The Royal Belfast Academical Institution,"College Square East, Belfast, BT1 6DL",Belfast,Belfast East,ACC,Protestant,BOYS,11-18,,,,,,,,94.00%,,,,54.5970353,-5.9368872,NI,Secondary
 ,St Mary's Christian Brothers' Grammar School,"49 University Rd, Belfast, BT7 1GY",Belfast,Belfast South,ACC,Roman Catholic,BOYS,,,,,,,,,93.90%,,,,54.58284322,-6.00076958,NI,Secondary
 ,Hunterhouse College,"Upper Lisburn Road, Finaghy, Belfast, Co Antrim,
 BT10 0LE",Belfast,South Belfast,ACC,Methodist,GIRLS,,,,,,,,,93.60%,,,,54.5557177,-5.9889778,NI,Secondary
@@ -366,4 +366,4 @@ BT10 0LE",Belfast,South Belfast,ACC,Methodist,GIRLS,,,,,,,,,93.60%,,,,54.5557177
 ,Dean Maguirc College,"26 Termon Road, Carrickmore, Omagh, Co Tyrone, BT79 9JR",Carrickmore,Mid Ulster,ACC,Roman Catholic,MIXED,,,,,,,,,83.10%,,,,54.593483,-7.0444056,NI,Secondary
 ,Loreto College,"Castlerock Road,Coleraine, Co Londonderry, BT51 3JZ",Coleraine,East Londonderry,ACC,Roman Catholic,MIXED,11-18,,,,,,,,82.90%,,,,55.13992801,-6.690183785,NI,Secondary
 ,Lagan College,"58 Laganvale Rd, Belfast, BT8 6PY",Belfast,Belfast East,ACC,Integrated,MIXED,,,,,,,,,82.50%,,,,54.56175376,-5.885248575,NI,Secondary
-,Dominican College,"1 College Park, Portstewart, BT55 7AJ",Portstewart,East Londonderry,ACC,Roman Catholic,GIRLS,,,,,,,,,81.40%,,,,55.18177423,-6.72146871,NI,Secondary
+,Dominican College,"1 College Park, Portstewart, BT55 7AJ",Portstewart,East Londonderry,ACC,Roman Catholic,MIXED,11-18,,,,,,,,81.40%,,,,55.18177423,-6.72146871,NI,Secondary
