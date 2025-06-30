@@ -771,7 +771,7 @@ export default function SchoolsMap() {
                 <Helmet>
                   <title>Top UK Schools Map | Interactive GCSE Performance & Rankings</title>
                   <link rel="canonical" href="https://chartsgp-3.onrender.com/schools-map" />
-                  <meta name="description" content="Explore the top UK secondary schools based on GCSE results. Interactive map and detailed school rankings filtered by rank, type, and performance." />
+                  <meta name="description" content="Explore the top UK (England and Northern Iralend) secondary schools based on GCSE results. Interactive map and detailed school rankings filtered by rank, type, and performance." />
                   <meta name="keywords" content="UK schools, GCSE results, school rankings, UK education, secondary schools, school map, data visualization, top schools UK" />
                   <meta name="author" content="Denis K" />
                   <meta name="robots" content="index, follow" />
